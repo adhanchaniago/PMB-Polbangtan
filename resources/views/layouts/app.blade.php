@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Sweet Alert -->
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
 </head>
 <body>
     <div id="app">
@@ -37,6 +40,7 @@
                         @if(!Auth::check())
                             <li><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
                             <li><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
+                            <li><a class="nav-link" href="{{ route('aktifasi.resend') }}">Aktifasi</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,7 +55,7 @@
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        @csrf
+                                        {{ csrf_field() }}
                                     </form>
                                 </div>
                             </li>
@@ -68,5 +72,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Sweet Alert -->
+	<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+
+    @yield('js')
 </body>
 </html>

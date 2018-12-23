@@ -69,3 +69,16 @@
     </div>
 </div>
 @endsection
+
+@section('js')
+	@if( Session::has('success') )
+		<script type="text/javascript">
+			swal("Berhasil", "{{ Session::get('success') }}", "success");
+		</script>
+	@endif
+	@if( Session::has('error') )
+		<script type="text/javascript">
+			swal("Gagal", "{{ Session::get('error') }}", "error");
+		</script>
+	@endif
+@endsection

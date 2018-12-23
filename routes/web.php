@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return Redirect::to('login');
 });
+Route::get('/register-success', function () {
+    return view('auth.success');
+});
+Route::get('/aktifasi', 'WelcomeController@aktifasi')->name('aktifasi');
+Route::get('/aktifasi-resend', 'WelcomeController@aktifasi_resend')->name('aktifasi.resend');
+Route::post('/aktifasi-send', 'WelcomeController@aktifasi_send')->name('aktifasi.send');
 
 Auth::routes();
 

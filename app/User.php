@@ -2,12 +2,13 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'status', 'verification_code', 'person_id', 'person_type'
     ];
 
     /**
@@ -26,4 +27,33 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function createUser(array $data)
+    {
+	    return User::create($data);
+    }
+
+    public static function updateUser(int $id, array $data)
+    {
+    	$user = User::findOrFail($id);
+    	$user->update($data);
+	    return $user;
+    }
+
+    public function querySearch(array $filter) : ?Collection
+    {
+        $query = $this->newQuery();
+
+        if (isset($filter['verification_code'])) {
+            $query->where('verification_code', $filter['verification_code']);
+        }
+        if (isset($filter['email'])) {
+            $query->where('email', $filter['email']);
+        }
+        if (isset($filter['status'])) {
+            $query->where('status', $filter['status']);
+        }
+
+        return $query->get();
+    }
 }

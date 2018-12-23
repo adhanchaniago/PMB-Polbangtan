@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Libs\Services\SiswaService;
+use App\Libs\Services\UserService;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -27,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/register-success';
 
     /**
      * Create a new controller instance.
@@ -60,12 +66,39 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(array $data, SiswaService $service, UserService $uService)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+    	$user = new User;
+
+    	DB::transaction(function() use (&$user, $data, $service, $uService) {
+    		$siswa = $service->createSiswa($data['name']);
+
+    		$data['password'] = Hash::make($data['password']);
+    		$data['verification_code'] = str_random(20);
+    		$data['person_type'] = 'siswa';
+    		$data['person_id'] = $siswa->getKey();
+
+    		$user  = $uService->createUser($data);
+    	});
+
+		// Mail::to($data['email'])->send(new AktivasiAkun($user));
+        
+        return $user;
     }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request, SiswaService $service, UserService $uService)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all(), $service, $uService)));
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }    
 }
