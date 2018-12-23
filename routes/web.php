@@ -24,6 +24,8 @@ Route::post('/aktifasi-send', 'WelcomeController@aktifasi_send')->name('aktifasi
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::put('/profile/{id}/update', 'HomeController@update')->name('profile.update');
 
 Route::get('admin', 'Admin\AdminController@index');
 Route::resource('admin/roles', 'Admin\RolesController');

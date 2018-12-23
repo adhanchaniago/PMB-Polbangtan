@@ -62,12 +62,32 @@
 							<h3>&nbsp;</h3>
 							<ul class="nav side-menu">
 								<li><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Home </a></li>
-								@can('pelamar_update')
-								<li><a href="{{ route('pelamar.show', Auth::user()->person_id) }}"><i class="fa fa-user"></i> Data Pelamar </a></li>
-								@endcan
-								@can('daftar_pmb')
-								<li><a href="{{ route('pendaftaran.create') }}"><i class="fa fa-book"></i> Daftar PMB </a></li>
-								@endcan
+								<li><a><i class="fa fa-database"></i> Master Data <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="#">Data Siswa</a></li>
+										<li><a href="#">Data User</a></li>
+										<li><a href="#">Jadwal Pendaftaran</a></li>
+									</ul>
+								</li>
+								<li><a><i class="fa fa-tasks"></i> Pendaftaran <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="#">Informasi Siswa</a></li>
+										<li><a href="#">Daftar PMB</a></li>
+										<li><a href="#">Verifikasi Dokumen</a></li>
+										<li><a href="#">Tes Tulis</a></li>
+										<li><a href="#">Tes Wawancara</a></li>
+										<li><a href="#">Tes Kesehatan</a></li>
+										<li><a href="#">Verifikasi Akhir</a></li>
+									</ul>
+								</li>
+								<li><a><i class="fa fa-edit"></i> CMS <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="#">Hubungi Kami</a></li>
+										<li><a href="#">Informasi Pendaftaran</a></li>
+										<li><a href="#">Brosur PMB</a></li>
+										<li><a href="#">Dokumen Persyaratan</a></li>
+									</ul>
+								</li>
 							</ul>
 						</div>
 					</div>
