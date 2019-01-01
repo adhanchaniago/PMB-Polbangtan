@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Pegawai;
+use App\Siswa;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;

@@ -6,6 +6,10 @@ return [
             'name' => 'administrator',
             'label' => 'Administrator',
         ],
+        'master_data' => [
+            'name' => 'master_data',
+            'label' => 'Master Data',
+        ],
         'user_read' => [
             'name' => 'user_read',
             'label' => 'User Read',
@@ -33,6 +37,10 @@ return [
         'jadwal_delete' => [
             'name' => 'jadwal_delete',
             'label' => 'Jadwal Delete',
+        ],
+        'pendaftaran' => [
+            'name' => 'pendaftaran',
+            'label' => 'Pendaftaran',
         ],
         'informasi_siswa' => [
             'name' => 'informasi_siswa',
@@ -80,6 +88,7 @@ return [
             'name' => 'appadmin',
             'label' => 'Admin Aplikasi',
             'permissions'=> [
+            	'master_data',
                 'user_read'
             ],
         ],
@@ -87,6 +96,7 @@ return [
             'name' => 'admin_pusat',
             'label' => 'Admin Pusat',
             'permissions'=> [
+            	'master_data',
                 'user_read',
                 'siswa_read',
                 'siswa_delete',
@@ -105,6 +115,7 @@ return [
             'name' => 'operator',
             'label' => 'Pperator',
             'permissions'=> [
+            	'master_data',
                 'siswa_read',
                 'jadwal_read',
                 'tes_tulis'
@@ -114,6 +125,7 @@ return [
             'name' => 'siswa',
             'label' => 'Siswa',
             'permissions' => [
+            	'pendaftaran',
             	'informasi_siswa',
             	'daftar_pmb'
             ],

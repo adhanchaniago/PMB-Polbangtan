@@ -63,6 +63,6 @@ class SiswaService implements SiswaContract
 	        $data['sk_tidak_hamil'] = $request->file('sk_tidak_hamil')->store("siswa/$id");
     	}
 
-        $this->model->findOrFail($id)->update($data);
+        $this->model->updateSiswa($id, $data);
     }
 }

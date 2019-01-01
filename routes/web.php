@@ -20,21 +20,36 @@ Route::get('/register-success', function () {
 Route::get('/aktifasi', 'WelcomeController@aktifasi')->name('aktifasi');
 Route::get('/aktifasi-resend', 'WelcomeController@aktifasi_resend')->name('aktifasi.resend');
 Route::post('/aktifasi-send', 'WelcomeController@aktifasi_send')->name('aktifasi.send');
+Route::get('/viewfile', 'ViewFileController@index')->name('viewfile');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', 'HomeController@profile')->name('profile');
-Route::put('/profile/{id}/update', 'HomeController@update')->name('profile.update');
+Route::group(['middleware' => 'auth'], function ()
+{
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/profile', 'HomeController@profile')->name('profile');
+	Route::put('/profile/{id}/update', 'HomeController@update')->name('profile.update');
 
-Route::get('admin', 'Admin\AdminController@index');
-Route::resource('admin/roles', 'Admin\RolesController');
-Route::resource('admin/permissions', 'Admin\PermissionsController');
-Route::resource('admin/users', 'Admin\UsersController');
-Route::resource('admin/pages', 'Admin\PagesController');
-Route::resource('admin/activitylogs', 'Admin\ActivityLogsController')->only([
-    'index', 'show', 'destroy'
-]);
-Route::resource('admin/settings', 'Admin\SettingsController');
-Route::get('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@getGenerator']);
-Route::post('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@postGenerator']);
+    Route::group(['middleware' => 'roles', 'roles' => 'administrator'], function ()
+    {
+		Route::get('admin', 'Admin\AdminController@index');
+		Route::resource('admin/roles', 'Admin\RolesController');
+		Route::resource('admin/permissions', 'Admin\PermissionsController');
+		Route::resource('admin/users', 'Admin\UsersController');
+		Route::resource('admin/pages', 'Admin\PagesController');
+		Route::resource('admin/activitylogs', 'Admin\ActivityLogsController')->only([
+		    'index', 'show', 'destroy'
+		]);
+		Route::resource('admin/settings', 'Admin\SettingsController');
+		Route::get('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@getGenerator']);
+		Route::post('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@postGenerator']);
+	});
+
+    Route::group(['middleware' => 'roles', 'roles' => 'siswa'], function ()
+    {
+		Route::resource('siswa', 'SiswaController');
+		Route::resource('pendaftaran', 'PendaftaranController');
+		Route::get('pendaftaran/jalur/pemilihan-jalur', 'PendaftaranController@jalur')->name('pilih-jalur');
+		Route::post('pendaftaran/store-jalur', 'PendaftaranController@store_jalur')->name('store-jalur');
+	});
+});

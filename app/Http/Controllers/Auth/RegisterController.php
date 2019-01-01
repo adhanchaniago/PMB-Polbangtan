@@ -79,6 +79,7 @@ class RegisterController extends Controller
     		$data['person_id'] = $siswa->getKey();
 
     		$user  = $uService->createUser($data);
+    		$user->assignRole(config('rolepermission.roles.siswa.name'));
     	});
 
 		// Mail::to($data['email'])->send(new AktivasiAkun($user));

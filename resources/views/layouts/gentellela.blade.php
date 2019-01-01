@@ -62,24 +62,49 @@
 							<h3>&nbsp;</h3>
 							<ul class="nav side-menu">
 								<li><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Home </a></li>
+								@can('master_data')
 								<li><a><i class="fa fa-database"></i> Master Data <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="#">Data Siswa</a></li>
+										@can('siswa_read')
+										<li><a href="{{ route('siswa.index') }}">Data Siswa</a></li>
+										@endcan
+										@can('user_read')
 										<li><a href="#">Data User</a></li>
+										@endcan
+										@can('jadwal_read')
 										<li><a href="#">Jadwal Pendaftaran</a></li>
+										@endcan
 									</ul>
 								</li>
+								@endcan
+								@can('pendaftaran')
 								<li><a><i class="fa fa-tasks"></i> Pendaftaran <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="#">Informasi Siswa</a></li>
-										<li><a href="#">Daftar PMB</a></li>
+										@can('informasi_siswa')
+										<li><a href="{{ route('siswa.show', Auth::user()->person_id) }}">Informasi Siswa</a></li>
+										@endcan
+										@can('daftar_pmb')
+										<li><a href="{{ route('pendaftaran.index') }}">Daftar PMB</a></li>
+										@endcan
+										@can('verifikasi_dokumen')
 										<li><a href="#">Verifikasi Dokumen</a></li>
+										@endcan
+										@can('tes_tulis')
 										<li><a href="#">Tes Tulis</a></li>
+										@endcan
+										@can('tes_wawancara')
 										<li><a href="#">Tes Wawancara</a></li>
+										@endcan
+										@can('tes_kesehatan')
 										<li><a href="#">Tes Kesehatan</a></li>
+										@endcan
+										@can('verifikasi_akhir')
 										<li><a href="#">Verifikasi Akhir</a></li>
+										@endcan
 									</ul>
 								</li>
+								@endcan
+								@can('cms')
 								<li><a><i class="fa fa-edit"></i> CMS <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a href="#">Hubungi Kami</a></li>
@@ -88,6 +113,7 @@
 										<li><a href="#">Dokumen Persyaratan</a></li>
 									</ul>
 								</li>
+								@endcan
 							</ul>
 						</div>
 					</div>

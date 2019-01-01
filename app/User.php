@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function person()
+    {
+        return $this->morphTo();
+    }
+
     public static function createUser(array $data)
     {
 	    return User::create($data);
