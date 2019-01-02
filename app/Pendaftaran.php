@@ -21,6 +21,13 @@ class Pendaftaran extends Model
 	    return Pendaftaran::create($data);
     }
 
+    public static function updatePendaftaran(int $id, array $data)
+    {
+    	$user = Pendaftaran::findOrFail($id);
+    	$user->update($data);
+	    return $user;
+    }
+
     public function querySearch(array $filter) : ?Collection
     {
         $query = $this->newQuery();

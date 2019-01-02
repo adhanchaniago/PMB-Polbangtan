@@ -17,3 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('sekolah/{id}/jurusan', 'Api\JurusanController@getJurusanBySekolah')->name('sekolah.jurusan');
+Route::get('institusi/{id}/jurusan', 'Api\JurusanController@getJurusanByInstitusi')->name('institusi.jurusan');

@@ -1,4 +1,4 @@
-<form action="{{ route('store-jalur') }}" id="form-umum" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form action="{{ route('store-jalur') }}" id="form-umum" method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
 	{{ csrf_field() }}
 	
 	<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
@@ -29,12 +29,30 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-sm-5">Nilai Rata-Rata Raport*</label>
+					<label class="control-label col-sm-5">Nilai Rata-Rata Raport Kelas 1*</label>
 					<div class="col-sm-3">
-						<input type="number" id="rata_rata_ganjil" class="form-control" name="rata_rata_ganjil" required>
+						<input type="number" step=".01" id="rata_rata_ganjil_1" class="form-control" name="rata_rata_ganjil_1" placeholder="Sem. Ganjil*" value="{{ Input::old('rata_rata_ganjil_1') }}" required>
 					</div>
 					<div class="col-sm-3">
-						<input type="number" id="rata_rata_genap" class="form-control" name="rata_rata_genap" required>
+						<input type="number" step=".01" id="rata_rata_genap_1" class="form-control" name="rata_rata_genap_1" placeholder="Sem. Genap*" value="{{ Input::old('rata_rata_genap_1') }}" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-5">Nilai Rata-Rata Raport Kelas 2*</label>
+					<div class="col-sm-3">
+						<input type="number" step=".01" id="rata_rata_ganjil_2" class="form-control" name="rata_rata_ganjil_2" placeholder="Sem. Ganjil*" value="{{ Input::old('rata_rata_ganjil_2') }}" required>
+					</div>
+					<div class="col-sm-3">
+						<input type="number" step=".01" id="rata_rata_genap_2" class="form-control" name="rata_rata_genap_2" placeholder="Sem. Genap*" value="{{ Input::old('rata_rata_genap_2') }}" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-5">Nilai Rata-Rata Raport Kelas 3*</label>
+					<div class="col-sm-3">
+						<input type="number" step=".01" id="rata_rata_ganjil_3" class="form-control" name="rata_rata_ganjil_3" placeholder="Sem. Ganjil*" value="{{ Input::old('rata_rata_ganjil_3') }}" required>
+					</div>
+					<div class="col-sm-3">
+						<input type="number" step=".01" id="rata_rata_genap_3" class="form-control" name="rata_rata_genap_3" placeholder="Sem. Genap" value="{{ Input::old('rata_rata_genap_3') }}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -69,3 +87,11 @@
 		</div>
 	</div>
 </form>
+
+@section('js')
+	@if( $errors->any() )
+		<script type="text/javascript">
+			swal("Tidak dapat menyimpan data", "{{ Html::ul($errors->all()) }}", "error");
+		</script>
+	@endif
+@endsection

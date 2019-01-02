@@ -28,6 +28,6 @@ class PendaftaranService implements PendaftaranContract
 
     public function updatePendaftaran(int $id, array $data)
     {
-
+    	$this->model->updatePendaftaran($id, $data);
     }
 }

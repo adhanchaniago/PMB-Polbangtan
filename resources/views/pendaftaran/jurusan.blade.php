@@ -32,8 +32,8 @@
 								<label class="control-label col-sm-2">Institusi</label>
 								<div class="col-sm-9">
 									<select class="form-control" name="institusi" id="institusi">
-									@foreach( config('institusi.institusi') as $key => $value )
-										<option value="{{ $value['kode'] }}">{{ $value['label'] }}</option>
+									@foreach( $institusi as $key => $value)
+										<option value="{{ $value->id }}">{{ $value->nama }}</option>
 									@endforeach
 									</select>
 								</div>
@@ -42,8 +42,8 @@
 								<label class="control-label col-sm-2">Jurusan 1</label>
 								<div class="col-sm-9">
 									<select class="form-control" name="jurusan_1" id="jurusan_1">
-									@foreach( config('institusi.jurusan.1') as $key => $value )
-										<option value="{{ $value['kode'] }}">{{ $value['label'] }}</option>
+									@foreach( $jurusan as $key => $value)
+										<option value="{{ $value->id }}">{{ $value->nama }}</option>
 									@endforeach
 									</select>
 								</div>
@@ -52,8 +52,8 @@
 								<label class="control-label col-sm-2">Jurusan 2</label>
 								<div class="col-sm-9">
 									<select class="form-control" name="jurusan_2" id="jurusan_2">
-									@foreach( config('institusi.jurusan.1') as $key => $value )
-										<option value="{{ $value['kode'] }}">{{ $value['label'] }}</option>
+									@foreach( $jurusan as $key => $value)
+										<option value="{{ $value->id }}">{{ $value->nama }}</option>
 									@endforeach
 									</select>
 								</div>
@@ -84,17 +84,17 @@
 
             	$.each(data, function( index, value ) {
 	                var option = $('<option>').attr({
-	                    value: value.kode,
-	                    id: value.kode,
-	                }).text(value.label);
+	                    value: value.id,
+	                    id: value.id,
+	                }).text(value.nama);
 
 	                $('#jurusan_1').append(option);
 				});
             	$.each(data, function( index, value ) {
 	                var option = $('<option>').attr({
-	                    value: value.kode,
-	                    id: value.kode,
-	                }).text(value.label);
+	                    value: value.id,
+	                    id: value.id,
+	                }).text(value.nama);
 
 	                $('#jurusan_2').append(option);
 				});

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Jurusan;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class JurusanController extends Controller
 {
     public function getJurusanByInstitusi($id) : ?Array
     {
-    	return config('institusi.jurusan.' . $id);
+    	return Jurusan::where('institusi_id', $id)->get()->toArray();
     }
 
     public function getJurusanBySekolah($id) : ?Array

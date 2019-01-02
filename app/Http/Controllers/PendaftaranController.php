@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Institusi;
+use App\Jurusan;
 use App\Libs\Services\PendaftaranService;
+use App\Libs\Services\PendaftaranDokumenService;
+use App\Libs\Traits\InfoPendaftaran;
 use App\Libs\Traits\InfoSiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Redirect;
 
 class PendaftaranController extends Controller
 {
-	use InfoSiswa;
+	use InfoSiswa, InfoPendaftaran;
 
     /**
      * Display a listing of the resource.
@@ -105,9 +110,11 @@ class PendaftaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, PendaftaranService $service)
     {
-        //
+        $service->updatePendaftaran($id, ['state' => 'cancel']);
+
+        return Redirect::to('pendaftaran');
     }
 
     public function jalur(PendaftaranService $service)
@@ -124,16 +131,56 @@ class PendaftaranController extends Controller
         ]);
     }
 
-    public function store_jalur(Request $request, PendaftaranService $service)
+    public function store_jalur(Request $request, PendaftaranService $service,
+    	PendaftaranDokumenService $d_service)
     {
+    	$this->validate($request,[
+            'rata_rata_ganjil_1' => 'required|numeric|max:10',
+            'rata_rata_genap_1' => 'required|numeric|max:10',
+            'rata_rata_ganjil_2' => 'required|numeric|max:10',
+            'rata_rata_genap_2' => 'required|numeric|max:10',
+            'rata_rata_ganjil_3' => 'required|numeric|max:10'
+        ]);
+
     	$pendaftaran = $this->getPendaftaran();
-    	dd($pendaftaran);
-    	dd($request->all());
+    	$cekPersyaratan = $this->cekPersyaratan($pendaftaran->jalur, $request->all());
+    	
+    	if ( $cekPersyaratan == '') {
+    		DB::transaction(function() use ($request, $pendaftaran, $service, $d_service) {
+	    		//Update pendaftaran (state)
+	    		$this->updateState($pendaftaran->id, 'pemilihan_jurusan');
+
+	    		//Simpan dokumen
+    			$d_service->createPendaftaranDokumen($request);
+    		});
+    	} else {
+    		if ( $pendaftaran->jalur == 'undangan-petani' ||
+    			 $pendaftaran->jalur == 'undangan-smk' ) {
+	    		DB::transaction(function() use ($request, $pendaftaran, $service, $d_service, $cekPersyaratan) {
+		    		//Update pendaftaran (state)
+		    		$this->updateState($pendaftaran->id, 'pemilihan_jurusan');
+		    		$service->updatePendaftaran($pendaftaran->id, ['keterangan' => $cekPersyaratan]);
+
+		    		//Simpan dokumen
+	    			$d_service->createPendaftaranDokumen($request);
+	    		});
+    		} else {
+				return Redirect::to('pendaftaran')->withError($cekPersyaratan);
+    		}
+    	}
+
+    	return redirect()->route('pilih-jurusan');
     }
 
     public function jurusan()
     {
-    	return view('pendaftaran.jurusan');
+    	$institusi = Institusi::all();
+    	$jurusan = Jurusan::where('institusi_id', $institusi[0]->id)->get();
+
+    	return view('pendaftaran.jurusan', [
+    		'institusi' => $institusi,
+    		'jurusan' => $jurusan
+    	]);
     }
 
     public function success()

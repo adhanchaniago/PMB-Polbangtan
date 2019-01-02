@@ -51,5 +51,7 @@ Route::group(['middleware' => 'auth'], function ()
 		Route::resource('pendaftaran', 'PendaftaranController');
 		Route::get('pendaftaran/jalur/pemilihan-jalur', 'PendaftaranController@jalur')->name('pilih-jalur');
 		Route::post('pendaftaran/store-jalur', 'PendaftaranController@store_jalur')->name('store-jalur');
+		Route::get('pendaftaran/jurusan/pemilihan-jurusan', 'PendaftaranController@jurusan')->name('pilih-jurusan');
+		Route::post('pendaftaran/store-jurusan', 'PendaftaranController@store_jurusan')->name('store-jurusan');
 	});
 });
