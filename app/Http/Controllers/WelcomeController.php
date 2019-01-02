@@ -42,7 +42,7 @@ class WelcomeController extends Controller
     	
     	if ($user->count() > 0) {
     		$user = $service->updateUser($user[0]->id, ['verification_code' => str_random(20)]);
-    		//Mail::to($data['email'])->send(new AktivasiAkun($user));
+    		Mail::to($data['email'])->send(new AktivasiAkun($user));
 
     		return Redirect::to('aktifasi-resend')->withSuccess('Kami telah mengirimkan link aktifasi ke email ' . $data['email'] . '. Silahkan cek email anda');
     	} else {

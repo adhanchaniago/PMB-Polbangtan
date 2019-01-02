@@ -82,7 +82,7 @@ class RegisterController extends Controller
     		$user->assignRole(config('rolepermission.roles.siswa.name'));
     	});
 
-		// Mail::to($data['email'])->send(new AktivasiAkun($user));
+		Mail::to($data['email'])->send(new AktivasiAkun($user));
         
         return $user;
     }
