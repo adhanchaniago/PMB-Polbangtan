@@ -15,6 +15,7 @@ class CreatePendaftaranDokumensTable extends Migration
     {
         Schema::create('pendaftaran_dokumens', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('pendaftaran_id');
             $table->string('key');
             $table->string('value')->nullable();
             $table->timestamps();

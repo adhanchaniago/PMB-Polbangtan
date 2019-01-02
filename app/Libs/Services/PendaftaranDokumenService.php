@@ -16,7 +16,7 @@ class PendaftaranDokumenService implements PendaftaranDokumenContract
         $this->model = $model;
     }
 
-    public function createPendaftaranDokumen(Request $request) : Void
+    public function createPendaftaranDokumen(int $pendaftaranId, Request $request) : Void
     {
     	$data = $request->except(['_token']);
     	foreach ($data as $key => $value) {
@@ -24,6 +24,7 @@ class PendaftaranDokumenService implements PendaftaranDokumenContract
     			$key = $request->file($key)->store("pendaftaran");
     		}
 	    	$this->model->createPendaftaranDokumen([
+	    		'pendaftaran_id' => $pendaftaranId,
 	    		'key' => $key,
 	    		'value' => $value
 	    	]);

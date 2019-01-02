@@ -117,9 +117,13 @@ class PendaftaranController extends Controller
         return Redirect::to('pendaftaran');
     }
 
-    public function jalur(PendaftaranService $service)
+    public function jalur()
     {
 		$pendaftaran = $this->getPendaftaran();
+
+		if ( $pendaftaran->state != 'start' ) {
+	        return Redirect::to('pendaftaran')->withError('Anda tidak dapat memilih jalur');
+		}
 
     	$view  = 'jalur-' . $pendaftaran->jalur;
     	$jalur = str_replace("-", " ", $pendaftaran->jalur);
@@ -148,7 +152,7 @@ class PendaftaranController extends Controller
     	if ( $cekPersyaratan == '') {
     		DB::transaction(function() use ($request, $pendaftaran, $service, $d_service) {
 	    		//Update pendaftaran (state)
-	    		$this->updateState($pendaftaran->id, 'pemilihan_jurusan');
+	    		$this->updateState($pendaftaran->id, 'menyelesaikan_pemberkasan');
 
 	    		//Simpan dokumen
     			$d_service->createPendaftaranDokumen($request);
@@ -158,11 +162,11 @@ class PendaftaranController extends Controller
     			 $pendaftaran->jalur == 'undangan-smk' ) {
 	    		DB::transaction(function() use ($request, $pendaftaran, $service, $d_service, $cekPersyaratan) {
 		    		//Update pendaftaran (state)
-		    		$this->updateState($pendaftaran->id, 'pemilihan_jurusan');
+		    		$this->updateState($pendaftaran->id, 'menyelesaikan_pemberkasan');
 		    		$service->updatePendaftaran($pendaftaran->id, ['keterangan' => $cekPersyaratan]);
 
 		    		//Simpan dokumen
-	    			$d_service->createPendaftaranDokumen($request);
+	    			$d_service->createPendaftaranDokumen($pendaftaran->id, $request);
 	    		});
     		} else {
 				return Redirect::to('pendaftaran')->withError($cekPersyaratan);

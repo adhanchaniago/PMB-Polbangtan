@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth'], function ()
 		Route::resource('admin/settings', 'Admin\SettingsController');
 		Route::get('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@getGenerator']);
 		Route::post('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@postGenerator']);
+		
+		Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 	});
 
     Route::group(['middleware' => 'roles', 'roles' => 'siswa'], function ()

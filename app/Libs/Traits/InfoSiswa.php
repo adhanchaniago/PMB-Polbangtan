@@ -93,7 +93,8 @@ trait InfoSiswa
 		    	$jalur = str_replace("-", " ", $pendaftaran->jalur);
 				return "Mendaftar Melalui Jalur " . ucwords($jalur);
 			} else {				
-				return $pendaftaran->state;
+		    	$state = str_replace("_", " ", $pendaftaran->state);
+				return ucwords($state);
 			}
 		}
 	}

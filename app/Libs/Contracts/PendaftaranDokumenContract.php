@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 interface PendaftaranDokumenContract
 {
-    public function createPendaftaranDokumen(Request $request);
+    public function createPendaftaranDokumen(int $pendaftaranId, Request $request);
 }
