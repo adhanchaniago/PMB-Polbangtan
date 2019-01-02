@@ -6,6 +6,7 @@ use App\User;
 use App\Libs\Services\SiswaService;
 use App\Libs\Services\UserService;
 use App\Http\Controllers\Controller;
+use App\Mail\AktivasiAkun;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
