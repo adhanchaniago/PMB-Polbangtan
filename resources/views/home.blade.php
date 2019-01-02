@@ -11,7 +11,9 @@
 
 		<div class="clearfix"></div>
 
-		@include('dashboard.' . Auth::user()->person_type)
+		@if ( Auth::user()->person_type != '')
+			@include('dashboard.' . Auth::user()->person_type)
+		@endif
 	</div>
 </div>
 @endsection
