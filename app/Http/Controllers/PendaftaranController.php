@@ -138,14 +138,6 @@ class PendaftaranController extends Controller
     public function store_jalur(Request $request, PendaftaranService $service,
     	PendaftaranDokumenService $d_service)
     {
-    	$this->validate($request,[
-            'rata_rata_ganjil_1' => 'required|numeric|max:10',
-            'rata_rata_genap_1' => 'required|numeric|max:10',
-            'rata_rata_ganjil_2' => 'required|numeric|max:10',
-            'rata_rata_genap_2' => 'required|numeric|max:10',
-            'rata_rata_ganjil_3' => 'required|numeric|max:10'
-        ]);
-
     	$pendaftaran = $this->getPendaftaran();
     	$cekPersyaratan = $this->cekPersyaratan($pendaftaran->jalur, $request->all());
     	

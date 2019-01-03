@@ -8,17 +8,21 @@ return [
             'arguments' => ['state'],
         ],
         'supports'      => [App\Pendaftaran::class],
-        'places'        => ['start', 'pemilihan_jurusan', 'verifikasi_dokumen',
-        					'tes_tulis', 'tes_wawancara', 'tes_kesehatan', 'verifikasi_akhir',
-        					'selesai', 'gugur_dokumen', 'gugur_tulis', 'gugur_wawancara',
-        					'gugur_kesehatan', 'gugur_akhir', 'cancel'],
+        'places'        => ['start', 'pemilihan_jurusan', 'review_pendaftaran',
+        					'verifikasi_dokumen', 'tes_tulis', 'tes_wawancara', 'tes_kesehatan',
+        					'verifikasi_akhir', 'selesai', 'gugur_dokumen', 'gugur_tulis',
+        					'gugur_wawancara', 'gugur_kesehatan', 'gugur_akhir', 'cancel'],
         'transitions'   => [
             'menyelesaikan_pemberkasan' => [
                 'from' => 'start',
                 'to'   => 'pemilihan_jurusan',
             ],
-            'menyelesaikan_pendaftaran' => [
+            'mereview_pendaftaran' => [
                 'from' => 'pemilihan_jurusan',
+                'to'   => 'review_pendaftaran',
+            ],
+            'menyelesaikan_pendaftaran' => [
+                'from' => 'review_pendaftaran',
                 'to'   => 'verifikasi_dokumen',
             ],
             'menolak_dokumen' => [

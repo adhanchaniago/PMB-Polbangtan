@@ -21,7 +21,7 @@ class UsersSeeder extends Seeder
         $user->assignRole(config('rolepermission.roles.administrator.name'));
 
         $user = User::create([
-        	'name' => 'Admin Aplikasi',
+        	'name' => 'Admin Pusat',
         	'email' => 'admin@polbangtan.com',
         	'password' => bcrypt('admin'),
         	'status' => 1

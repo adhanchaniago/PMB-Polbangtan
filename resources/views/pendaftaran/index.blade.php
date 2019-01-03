@@ -23,6 +23,13 @@
 						</a>
 					</div>
 					@endif
+					@if( $data->state == 'pemilihan_jurusan' )
+					<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
+						<a class="btn btn-app" href="{{ route('pilih-jurusan') }}">
+							<i class="fa fa-check"></i> Pilih Jurusan
+						</a>
+					</div>
+					@endif
 
 					@include('pendaftaran.show')
 				@endif
