@@ -30,6 +30,13 @@
 						</a>
 					</div>
 					@endif
+					@if( $data->state == 'review_pendaftaran' )
+					<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
+						<a class="btn btn-app" href="{{ route('pendaftaran.resume') }}">
+							<i class="fa fa-send"></i> Lihat Resume
+						</a>
+					</div>
+					@endif
 
 					@include('pendaftaran.show')
 				@endif

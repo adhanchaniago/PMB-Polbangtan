@@ -170,6 +170,10 @@ class PendaftaranController extends Controller
 
     public function jurusan()
     {
+		if ( $pendaftaran->state != 'pemilihan_jurusan' ) {
+	        return Redirect::to('pendaftaran')->withError('Anda tidak dapat memilih jurusan');
+		}
+
     	$institusi = Institusi::all();
     	$jurusan = Jurusan::where('institusi_id', $institusi[0]->id)->get();
 
@@ -179,8 +183,29 @@ class PendaftaranController extends Controller
     	]);
     }
 
-    public function success()
+    public function store_jurusan(Request $request, PendaftaranService $service)
     {
-    	return view('pendaftaran.success');
-    }    
+    	$data = $request->only(['institusi', 'jurusan_1', 'jurusan_2']);
+
+    	if ( $data['jurusan_1'] == $data['jurusan_2'] ) {
+    		return redirect()->back()->withError('Jurusan tidak boleh sama');
+    	}
+
+    	$pendaftaran = $this->getPendaftaran();
+		DB::transaction(function() use ($data, $pendaftaran, $service) {
+	    	$service->updatePendaftaran($pendaftaran->id, [
+	    		'institusi' => $data['institusi'],
+	    		'jurusan_1' => $data['jurusan_1'],
+	    		'jurusan_2' => $data['jurusan_2']
+	    	]);
+			$this->updateState($pendaftaran->id, 'mereview_pendaftaran');
+		});
+
+		return redirect()->route('pendaftaran.resume');
+    }
+
+    public function resume()
+    {
+    	return view('pendaftaran.resume');
+    }
 }

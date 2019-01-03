@@ -68,6 +68,11 @@
 @endsection
 
 @section('js')
+@if( Session::has('error') )
+	<script type="text/javascript">
+		swal("Pendaftaran Gagal", "{!! Session::get('error') !!}", "error");
+	</script>
+@endif
 <script type="text/javascript">
 	$( "#institusi" ).change(function() {
 		var url = "{{ route('institusi.jurusan', 'replace-this') }}";
