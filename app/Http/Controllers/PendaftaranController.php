@@ -170,6 +170,7 @@ class PendaftaranController extends Controller
 
     public function jurusan()
     {
+    	$pendaftaran = $this->getPendaftaran();
 		if ( $pendaftaran->state != 'pemilihan_jurusan' ) {
 	        return Redirect::to('pendaftaran')->withError('Anda tidak dapat memilih jurusan');
 		}
@@ -206,6 +207,7 @@ class PendaftaranController extends Controller
 
     public function resume()
     {
-    	return view('pendaftaran.resume');
+
+    	return view('pendaftaran.resumea');
     }
 }
