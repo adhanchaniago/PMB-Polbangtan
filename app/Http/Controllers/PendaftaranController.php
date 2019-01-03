@@ -147,7 +147,7 @@ class PendaftaranController extends Controller
 	    		$this->updateState($pendaftaran->id, 'menyelesaikan_pemberkasan');
 
 	    		//Simpan dokumen
-    			$d_service->createPendaftaranDokumen($request);
+    			$d_service->createPendaftaranDokumen($pendaftaran->id, $request);
     		});
     	} else {
     		if ( $pendaftaran->jalur == 'undangan-petani' ||
