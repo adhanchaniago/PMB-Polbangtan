@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "047fd0762907c39b653c4f257993630e",
@@ -176,21 +176,21 @@
         },
         {
             "name": "brexis/laravel-workflow",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brexis/laravel-workflow.git",
-                "reference": "3f16611d64ff1b01334761797511953d4aa6cc93"
+                "reference": "89358dcabf6b23f1e9d4493210fd35d5063d13e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brexis/laravel-workflow/zipball/3f16611d64ff1b01334761797511953d4aa6cc93",
-                "reference": "3f16611d64ff1b01334761797511953d4aa6cc93",
+                "url": "https://api.github.com/repos/brexis/laravel-workflow/zipball/89358dcabf6b23f1e9d4493210fd35d5063d13e8",
+                "reference": "89358dcabf6b23f1e9d4493210fd35d5063d13e8",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/console": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
                 "php": ">=5.5.9",
                 "symfony/event-dispatcher": "^3.3 || ^4.0",
                 "symfony/process": "^3.3 || ^4.0",
@@ -230,7 +230,7 @@
                 "symfony",
                 "workflow"
             ],
-            "time": "2018-07-25T19:28:41+00:00"
+            "time": "2019-01-03T10:49:24+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3046,16 +3046,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "8abb4f9aa89ddea9d52112c65bbe8d0125e2fa8e"
+                "reference": "cfd5dc225767ca154853752abc93aeec040fcf36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/8abb4f9aa89ddea9d52112c65bbe8d0125e2fa8e",
-                "reference": "8abb4f9aa89ddea9d52112c65bbe8d0125e2fa8e",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/cfd5dc225767ca154853752abc93aeec040fcf36",
+                "reference": "cfd5dc225767ca154853752abc93aeec040fcf36",
                 "shasum": ""
             },
             "require": {
@@ -3092,7 +3092,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2018-07-29T20:33:41+00:00"
+            "time": "2018-10-30T17:29:25+00:00"
         }
     ],
     "packages-dev": [

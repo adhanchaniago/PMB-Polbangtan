@@ -51,10 +51,11 @@ Route::group(['middleware' => 'auth'], function ()
     {
 		Route::resource('siswa', 'SiswaController');
 		Route::resource('pendaftaran', 'PendaftaranController');
-		Route::get('pendaftaran/jalur/pemilihan-jalur', 'PendaftaranController@jalur')->name('pilih-jalur');
-		Route::post('pendaftaran/store-jalur', 'PendaftaranController@store_jalur')->name('store-jalur');
-		Route::get('pendaftaran/jurusan/pemilihan-jurusan', 'PendaftaranController@jurusan')->name('pilih-jurusan');
-		Route::post('pendaftaran/store-jurusan', 'PendaftaranController@store_jurusan')->name('store-jurusan');
-		Route::get('pendaftaran/resume/resume-pendaftaran', 'PendaftaranController@resume')->name('pendaftaran.resume');
+		Route::get('pemilihan-jalur', 'PendaftaranController@jalur')->name('pilih-jalur');
+		Route::post('jalur/simpan-jalur', 'PendaftaranController@store_jalur')->name('store-jalur');
+		Route::get('jurusan/pemilihan-jurusan', 'PendaftaranController@jurusan')->name('pilih-jurusan');
+		Route::post('jurusan/simpan-jurusan', 'PendaftaranController@store_jurusan')->name('store-jurusan');
+		Route::resource('prestasi', 'PrestasiController');
+		Route::get('resume', 'PendaftaranController@resume')->name('pendaftaran.resume');
 	});
 });

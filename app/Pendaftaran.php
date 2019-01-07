@@ -16,6 +16,11 @@ class Pendaftaran extends Model
         'state' => 'start',
     ];
 
+    public function dokumen()
+    {
+    	return $this->hasMany('App\PendaftaranDokumen', 'pendaftaran_id');
+    }
+
     public static function createPendaftaran(array $data)
     {
 	    return Pendaftaran::create($data);

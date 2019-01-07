@@ -94,11 +94,3 @@
 		</div>
 	</div>
 </form>
-
-@section('js')
-	@if( $errors->any() )
-		<script type="text/javascript">
-			swal("Tidak dapat menyimpan data", "{{ Html::ul($errors->all()) }}", "error");
-		</script>
-	@endif
-@endsection

@@ -21,7 +21,7 @@ class PendaftaranDokumenService implements PendaftaranDokumenContract
     	$data = $request->except(['_token']);
     	foreach ($data as $key => $value) {
     		if ( $request->hasFile($key) ) {
-    			$key = $request->file($key)->store("pendaftaran");
+    			$value = $request->file($key)->store("pendaftaran");
     		}
 	    	$this->model->createPendaftaranDokumen([
 	    		'pendaftaran_id' => $pendaftaranId,
