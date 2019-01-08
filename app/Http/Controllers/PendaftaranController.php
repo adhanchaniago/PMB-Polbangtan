@@ -176,7 +176,7 @@ class PendaftaranController extends Controller
         foreach ($siswa->toArray() as $key => $value) {
             if ($key != 'id' && $key != 'created_at' && $key != 'updated_at') {
                 $cek_sistem = true;
-                $keterangan = $this->cekPersyaratan($siswa, $pendaftaran->jalur, $key, $value);
+                $keterangan = $this->cekPersyaratan($siswa, $pendaftaran->jalur, $key, $value ?? 0);
 
                 if ($keterangan != '') {
                     $cek_sistem = false;
