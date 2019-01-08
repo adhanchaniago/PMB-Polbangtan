@@ -49,6 +49,11 @@
 @endsection
 
 @section('js')
+	@if( Session::has('success') )
+		<script type="text/javascript">
+			swal("Berhasil", "{{ Session::get('success') }}", "success");
+		</script>
+	@endif
 	@if( $errors->any() )
 		<script type="text/javascript">
 			swal("Tidak dapat menyimpan data", "{{ Html::ul($errors->all()) }}", "error");

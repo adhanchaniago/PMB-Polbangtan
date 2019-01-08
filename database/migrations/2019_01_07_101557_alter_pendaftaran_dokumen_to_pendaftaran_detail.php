@@ -19,7 +19,7 @@ class AlterPendaftaranDokumenToPendaftaranDetail extends Migration
             $table->boolean('cek_sistem');
             $table->boolean('cek_admin');
             $table->string('keterangan')->nullable();
-            $table->boolean('kelompok');
+            $table->string('kelompok');
         });
     }
 

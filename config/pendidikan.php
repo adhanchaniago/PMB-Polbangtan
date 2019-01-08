@@ -18,39 +18,39 @@ return [
 
 	'jurusan' => [
 		'1' => [
-			'1' => [
+			'11' => [
 				'kode' => '11',
 				'label' => 'Agribisnis Tanaman Pangan & Hortikultura'
 			],
-			'2' => [
+			'12' => [
 				'kode' => '12',
 				'label' => 'Agribisnis Tanaman Perkebunan'
 			],
-			'3' => [
+			'13' => [
 				'kode' => '13',
 				'label' => 'Teknologi Pengolahan Hasil Pertanian'
 			],
-			'4' => [
+			'14' => [
 				'kode' => '199',
 				'label' => 'Lainnya'
 			],
 		],
 		'2' => [
-			'1' => [
+			'21' => [
 				'kode' => '21',
 				'label' => 'IPA'
 			],
-			'2' => [
+			'22' => [
 				'kode' => '22',
 				'label' => 'IPS'
 			],
-			'3' => [
+			'299' => [
 				'kode' => '299',
 				'label' => 'Lainnya'
 			]
 		],
         '3' => [
-            '1' => [
+            '31' => [
                 'kode' => '31',
                 'label' => 'Mesin'
             ]

@@ -92,7 +92,7 @@ trait InfoSiswa
 			if ( $pendaftaran->state == 'start' ) {
 		    	$jalur = str_replace("-", " ", $pendaftaran->jalur);
 				return "Mendaftar Melalui Jalur " . ucwords($jalur);
-			} else {				
+			} else {
 		    	$state = str_replace("_", " ", $pendaftaran->state);
 				return ucwords($state);
 			}
@@ -105,7 +105,7 @@ trait InfoSiswa
 		$pendaftaran = Pendaftaran::where('siswa_id', $user->person_id)
 								  ->where('state', '<>', 'cancel')
 								  ->first();
-		
+
 		return $pendaftaran;
 	}
 }

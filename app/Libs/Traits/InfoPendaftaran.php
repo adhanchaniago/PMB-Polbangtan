@@ -2,8 +2,8 @@
 
 namespace App\Libs\Traits;
 
-use App\Pendaftaran;
 use App\Jurusan;
+use App\Pendaftaran;
 use App\Siswa;
 use Carbon\Carbon;
 use Workflow;
@@ -69,7 +69,7 @@ trait InfoPendaftaran
      * @param String $value
      * @return String
      */
-    protected function cekJalurTugas(String $key, String $value) : String
+    protected function cekJalurTugas(String $key, String $value): String
     {
         //cek tinggi badan
         if ($key == 'tinggi_badan') {
@@ -82,118 +82,6 @@ trait InfoPendaftaran
         if ($key == 'tanggal_lahir') {
             if (!$this->cekUmur($value, 444)) { //444 bulan = 37 tahun
                 return 'Umur ' . $this->keterangan;
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * @param String $key
-     * @param String $value
-     * @return String
-     */
-    protected function cekJalurSmk(String $key, String $value) : String
-    {
-        //cek tinggi badan
-        if ($key == 'tinggi_badan') {
-            if (!$this->cekTinggiBadan($value)) {
-                return 'Tinggi Badan ' . $this->keterangan;
-            }
-        }
-
-        //Cek Tipe Sekolah Harus SMKPP
-
-        //Cek Nilai Rata-Rata Semester 1 - 5
-        /*$rata_rata_ganjil_1 = $request['rata_rata_ganjil_1'];
-        $rata_rata_genap_1 = $request['rata_rata_genap_1'];
-        $rata_rata_ganjil_2 = $request['rata_rata_ganjil_2'];
-        $rata_rata_genap_2 = $request['rata_rata_genap_2'];
-        $rata_rata_ganjil_3 = $request['rata_rata_ganjil_3'];
-        $rata_rata_genap_3 = $request['rata_rata_genap_3'];
-
-        if ($rata_rata_ganjil_1 <= 7.5) {
-            $this->result = "<p>Nilai Rata - Rata Semeseter Ganjil Kelas 1 Tidak Memenuhi Syarat</p>";
-        }
-        if ($rata_rata_genap_1 <= 7.5) {
-            $this->result .= "<p>Nilai Rata - Rata Semeseter Genap Kelas 1 Tidak Memenuhi Syarat</p>";
-        }
-        if ($rata_rata_ganjil_2 <= 7.5) {
-            $this->result .= "<p>Nilai Rata - Rata Semeseter Ganjil Kelas 2 Tidak Memenuhi Syarat</p>";
-        }
-        if ($rata_rata_genap_2 <= 7.5) {
-            $this->result .= "<p>Nilai Rata - Rata Semeseter Genap Kelas 2 Tidak Memenuhi Syarat</p>";
-        }
-        if ($rata_rata_ganjil_3 <= 7.5) {
-            $this->result .= "<p>Nilai Rata - Rata Semeseter Ganjil Kelas 3 Tidak Memenuhi Syarat</p>";
-        }*/
-        return '';
-    }
-
-    /**
-     * @param String $key
-     * @param String $value
-     * @return String
-     */
-    protected function cekJalurPetani(String $key, String $value) : String
-    {
-        //cek tinggi badan
-        if ($key == 'tinggi_badan') {
-            if (!$this->cekTinggiBadan($value)) {
-                return 'Tinggi Badan ' . $this->keterangan;
-            }
-        }
-
-        //Cek tahun kelulusan paling lama 2 tahun
-        if ($key == 'tahun_lulus') {
-            if (!$this->cekTahunLulus($value)) {
-                return 'Tahun Lulus ' . $this->keterangan;
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * @param String $key
-     * @param String $value
-     * @return String
-     */
-    protected function cekJalurKerjasama(String $key, String $value) : String
-    {
-        //cek tinggi badan
-        if ($key == 'tinggi_badan') {
-            if (!$this->cekTinggiBadan($value)) {
-                return 'Tinggi Badan ' . $this->keterangan;
-            }
-        }
-
-        //cek usia per 31 agustus maks 25 tahun 0 bulan
-        if ($key == 'tanggal_lahir') {
-            $tglahir = Carbon::createFromFormat("yyyy-MM-dd", $value);
-        }
-
-        return '';
-    }
-
-    /**
-     * @param String $key
-     * @param String $value
-     * @return String
-     */
-    protected function cekJalurUmum(String $key, String $value) : String
-    {
-        //cek tinggi badan
-        if ($key == 'tinggi_badan') {
-            if (!$this->cekTinggiBadan($value)) {
-                return 'Tinggi Badan ' . $this->keterangan;
-            }
-        }
-
-        //cek tahun kelulusan paling lama 2 tahun
-        if ($key == 'tahun_lulus') {
-            if (!$this->cekTahunLulus($value)) {
-                return 'Tahun Lulus ' . $this->keterangan;
             }
         }
 
@@ -217,20 +105,7 @@ trait InfoPendaftaran
         return true;
     }
 
-    /**
-     * @param int $tahun_lulus
-     * @return bool
-     */
-    protected function cekTahunLulus(int $tahun_lulus) : bool
-    {
-        $tahun = date('Y');
-        if ($tahun - $tahun_lulus > 2) {
-            return false;
-        }
-        return true;
-    }
-
-    protected function cekUmur(String $tanggal_lahir, int $batas) : bool
+    protected function cekUmur(String $tanggal_lahir, int $batas): bool
     {
         $lahir = Carbon::parse($tanggal_lahir);
         $syarat = Carbon::parse('2018-08-31');
@@ -240,6 +115,141 @@ trait InfoPendaftaran
         }
 
         return true;
+    }
+
+    /**
+     * @param String $key
+     * @param String $value
+     * @return String
+     */
+    protected function cekJalurSmk(String $key, String $value): String
+    {
+        //cek tinggi badan
+        if ($key == 'tinggi_badan') {
+            if (!$this->cekTinggiBadan($value)) {
+                return 'Tinggi Badan ' . $this->keterangan;
+            }
+        }
+
+        //Cek Tipe Sekolah Harus SMKPP
+        if ($key == 'tipe_sekolah') {
+            if ($value != 1) {
+                return 'Tipe Sekolah ' . $this->keterangan;
+            }
+        }
+
+        //Cek Nilai Rata-Rata Semester 1 - 5
+        if ($key == 'rata_rata_ganjil_1') {
+            if ($value <= 7.5) {
+                return 'Nilai Rata - Rata Semeseter Ganjil Kelas 1 ' . $this->keterangan;
+            }
+        }
+        if ($key == 'rata_rata_genap_1') {
+            if ($value <= 7.5) {
+                return 'Nilai Rata - Rata Semeseter Genap Kelas 1 ' . $this->keterangan;
+            }
+        }
+        if ($key == 'rata_rata_ganjil_2') {
+            if ($value <= 7.5) {
+                return 'Nilai Rata - Rata Semeseter Ganjil Kelas 2 ' . $this->keterangan;
+            }
+        }
+        if ($key == 'rata_rata_genap_2') {
+            if ($value <= 7.5) {
+                return 'Nilai Rata - Rata Semeseter Genap Kelas 2 ' . $this->keterangan;
+            }
+        }
+        if ($key == 'rata_rata_ganjil_3') {
+            if ($value <= 7.5) {
+                return 'Nilai Rata - Rata Semeseter Ganjil Kelas 3 ' . $this->keterangan;
+            }
+        }
+        return '';
+    }
+
+    /**
+     * @param String $key
+     * @param String $value
+     * @return String
+     */
+    protected function cekJalurPetani(String $key, String $value): String
+    {
+        //cek tinggi badan
+        if ($key == 'tinggi_badan') {
+            if (!$this->cekTinggiBadan($value)) {
+                return 'Tinggi Badan ' . $this->keterangan;
+            }
+        }
+
+        //Cek tahun kelulusan paling lama 2 tahun
+        if ($key == 'tahun_lulus') {
+            if (!$this->cekTahunLulus($value)) {
+                return 'Tahun Lulus ' . $this->keterangan;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * @param int $tahun_lulus
+     * @return bool
+     */
+    protected function cekTahunLulus(int $tahun_lulus): bool
+    {
+        $tahun = date('Y');
+        if ($tahun - $tahun_lulus > 2) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param String $key
+     * @param String $value
+     * @return String
+     */
+    protected function cekJalurKerjasama(String $key, String $value): String
+    {
+        //cek tinggi badan
+        if ($key == 'tinggi_badan') {
+            if (!$this->cekTinggiBadan($value)) {
+                return 'Tinggi Badan ' . $this->keterangan;
+            }
+        }
+
+        //cek usia per 31 agustus maks 25 tahun 0 bulan
+        if ($key == 'tanggal_lahir') {
+            if (!$this->cekUmur($value, 300)) { //300 bulan = 25 tahun
+                return 'Umur ' . $this->keterangan;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * @param String $key
+     * @param String $value
+     * @return String
+     */
+    protected function cekJalurUmum(String $key, String $value): String
+    {
+        //cek tinggi badan
+        if ($key == 'tinggi_badan') {
+            if (!$this->cekTinggiBadan($value)) {
+                return 'Tinggi Badan ' . $this->keterangan;
+            }
+        }
+
+        //cek tahun kelulusan paling lama 2 tahun
+        if ($key == 'tahun_lulus') {
+            if (!$this->cekTahunLulus($value)) {
+                return 'Tahun Lulus ' . $this->keterangan;
+            }
+        }
+
+        return '';
     }
 
     /**

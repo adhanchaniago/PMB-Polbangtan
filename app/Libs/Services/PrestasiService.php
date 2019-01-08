@@ -27,9 +27,8 @@ class PrestasiService implements PrestasiContract
     }
 
     /**
-     * [getPrestasiByPendaftaran description]
-     * @param  int    $pendaftaranId [description]
-     * @return Collection
+     * @param int $pendaftaranId
+     * @return Collection|null
      */
     public function getPrestasiByPendaftaran(int $pendaftaranId) : ?Collection
     {
@@ -37,20 +36,19 @@ class PrestasiService implements PrestasiContract
     }
 
     /**
-     * [updatePrestasi description]
-     * @param  int    $id   [description]
-     * @param  array  $data [description]
+     * @param int $id
+     * @param array $data
+     * @return Void
      */
-    public function updatePrestasi(int $id, array $data) : Void
+    public function updatePrestasi(int $id, array $data)
     {
         $this->model->updatePrestasi($id, $data);
     }
 
     /**
-     * [deletePrestasi description]
-     * @param  int    $id [description]
+     * @param int $id
      */
-    public function deletePrestasi(int $id) : Void
+    public function deletePrestasi(int $id)
     {
     	$this->model->deletePrestasi($id);
     }

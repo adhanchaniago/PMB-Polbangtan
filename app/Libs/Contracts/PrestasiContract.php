@@ -2,8 +2,6 @@
 
 namespace App\Libs\Contracts;
 
-use Illuminate\Http\Request;
-
 interface PrestasiContract
 {
     public function createPrestasi(array $data);

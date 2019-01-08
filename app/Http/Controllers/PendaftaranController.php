@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Institusi;
 use App\Jurusan;
-use App\Siswa;
 use App\Libs\Services\PendaftaranDetailService;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Services\PrestasiService;
@@ -12,7 +11,6 @@ use App\Libs\Services\VerifikasiDetailService;
 use App\Libs\Services\VerifikasiPendaftaranService;
 use App\Libs\Traits\InfoPendaftaran;
 use App\Libs\Traits\InfoSiswa;
-use App\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Redirect;
@@ -70,9 +68,15 @@ class PendaftaranController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, String $jalur, PendaftaranService $service)
+    public function store(Request $request, PendaftaranService $service)
     {
-        //
+        DB::transaction(function () use ($request, $service) {
+
+            $this->updateState($request->id, 'menyelesaikan_pendaftaran');
+        });
+
+
+        return Redirect::to('pendaftaran')->withSuccess('Pendaftaran berhasil disubmit');
     }
 
     /**
@@ -169,8 +173,9 @@ class PendaftaranController extends Controller
 
                 if ($keterangan != '') {
                     $cek_sistem = false;
-                    if ($pendaftaran->jalur != 'undangan-petani' ||
-                        $pendaftaran->jalur != 'undangan-smk') {
+                    if ($pendaftaran->jalur == 'undangan-petani' ||
+                        $pendaftaran->jalur == 'undangan-smk') {
+                    } else {
                         $rollback = true;
                         break;
                     }
@@ -197,15 +202,10 @@ class PendaftaranController extends Controller
         $data = $request->except(['_token']);
         foreach ($data as $key => $value) {
             $cek_sistem = true;
-            $keterangan = $this->cekPersyaratan($siswa, $pendaftaran->jalur, $key, $value);
+            $keterangan = $this->cekPersyaratan($siswa, $pendaftaran->jalur, $key, $value??0);
 
             if ($keterangan != '') {
                 $cek_sistem = false;
-                if ($pendaftaran->jalur != 'undangan-petani' ||
-                    $pendaftaran->jalur != 'undangan-smk') {
-                    $rollback = true;
-                    break;
-                }
             }
 
             if ( $request->hasFile($key) ) {
@@ -248,7 +248,9 @@ class PendaftaranController extends Controller
     /**
      * @param Request $request
      * @param PendaftaranService $service
+     * @param PendaftaranDetailService $dService
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Throwable
      */
     public function store_jurusan(Request $request,
                                   PendaftaranService $service,
@@ -288,21 +290,39 @@ class PendaftaranController extends Controller
 
     /**
      * @param Request $request
-     * @param VerifikasiPendaftaranService $vService
-     * @param VerifikasiDetailService $dService
+     * @param PendaftaranDetailService $service
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function resume(Request $request, PendaftaranDetailService $service)
+    public function resume(Request $request,
+                           PendaftaranDetailService $service,
+                           PrestasiService $pService)
     {
         $pendaftaran = $this->getPendaftaran();
         $pendaftaran['jalur_label'] = ucwords(str_replace("-", " ", $pendaftaran->jalur));
+        $pendaftaran['jurusan_1_label'] = Jurusan::selectName($pendaftaran->jurusan_1);
+        $pendaftaran['jurusan_2_label'] = Jurusan::selectName($pendaftaran->jurusan_2);
 
         $detail = $service->getPendaftaranDetailByPendaftaran($pendaftaran->id);
-        dd($detail);
+        $biodata = $detail->map(function($item) {
+            return $item;
+        })->where('kelompok', 'biodata');
+
+        $dokumen = $detail->map(function($item) {
+            return $item;
+        })->where('kelompok', 'berkas');
+
+        $cek_sistem_false = $detail->map(function($item) {
+            return $item;
+        })->where('cek_sistem', false)->count();
+
+        $prestasi = $pService->getPrestasiByPendaftaran($pendaftaran->id);
 
         return view('pendaftaran.resume', [
             'pendaftaran' => $pendaftaran,
-            'detail' => $detail
+            'biodata' => $biodata,
+            'dokumen' => $dokumen,
+            'cek_sistem_false' => $cek_sistem_false,
+            'prestasi' => $prestasi
         ]);
     }
 
