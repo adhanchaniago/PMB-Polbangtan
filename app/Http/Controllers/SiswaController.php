@@ -124,10 +124,9 @@ class SiswaController extends Controller
         $pendaftaran['jurusan_1_label'] = Jurusan::selectName($pendaftaran->jurusan_1);
         $pendaftaran['jurusan_2_label'] = Jurusan::selectName($pendaftaran->jurusan_2);
 
-        $pdf = PDF::loadView('siswa.kartu', [
+        return view('siswa.kartu', [
             'siswa' => $siswa,
             'pendaftaran' => $pendaftaran
         ]);
-        return $pdf->stream();
     }
 }
