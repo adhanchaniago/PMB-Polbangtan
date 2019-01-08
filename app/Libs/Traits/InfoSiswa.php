@@ -4,7 +4,6 @@ namespace App\Libs\Traits;
 
 use App\Siswa;
 use App\Pendaftaran;
-use App\User;
 
 trait InfoSiswa
 {

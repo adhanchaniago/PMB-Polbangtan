@@ -57,7 +57,7 @@
 						@if( $pendaftaran !== null)
 						<tr>
 							<td colspan="2">
-								<a href="{{ route('siswa.kartu') }}" class="btn btn-success">
+								<a href="{{ route('siswa.kartu') }}" class="btn btn-success" target="_blank">
 									Unduh Kartu Peserta
 								</a>
 							</td>

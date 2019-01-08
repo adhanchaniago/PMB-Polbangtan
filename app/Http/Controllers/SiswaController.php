@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Jurusan;
 use App\Libs\Services\SiswaService;
+use App\Libs\Traits\InfoSiswa;
 use Illuminate\Http\Request;
-use Redirect;
+use PDF, Redirect;
 
 class SiswaController extends Controller
 {
+    use InfoSiswa;
+
     /**
      * Display a listing of the resource.
      *
@@ -111,5 +115,19 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function kartu(Request $request)
+    {
+        $siswa = $request->user()->person;
+        $pendaftaran = $this->getPendaftaran();
+        $pendaftaran['jurusan_1_label'] = Jurusan::selectName($pendaftaran->jurusan_1);
+        $pendaftaran['jurusan_2_label'] = Jurusan::selectName($pendaftaran->jurusan_2);
+
+        $pdf = PDF::loadView('siswa.kartu', [
+            'siswa' => $siswa,
+            'pendaftaran' => $pendaftaran
+        ]);
+        return $pdf->stream();
     }
 }
