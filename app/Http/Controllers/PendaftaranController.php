@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Institusi;
 use App\Jurusan;
 use App\Siswa;
-use App\Libs\Services\PendaftaranDokumenService;
+use App\Libs\Services\PendaftaranDetailService;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Services\PrestasiService;
 use App\Libs\Services\VerifikasiDetailService;
@@ -150,41 +150,81 @@ class PendaftaranController extends Controller
     /**
      * @param Request $request
      * @param PendaftaranService $service
-     * @param PendaftaranDokumenService $dService
+     * @param PendaftaranDetailService $dService
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store_jalur(Request $request, PendaftaranService $service,
-                                PendaftaranDokumenService $dService)
+                                PendaftaranDetailService $dService)
     {
+        $rollback = false; $keterangan = '';
         $siswa = $request->user()->person;
         $pendaftaran = $this->getPendaftaran();
 
-        $data = array_merge($request->all(), $siswa->toArray());
-        $cekPersyaratan = $this->cekPersyaratan($pendaftaran->jalur, $data);
+        DB::beginTransaction();
+        //insert data siswa ke pendaftaran detail
+        foreach ($siswa->toArray() as $key => $value) {
+            if ($key != 'id' && $key != 'created_at' && $key != 'updated_at') {
+                $cek_sistem = true;
+                $keterangan = $this->cekPersyaratan($siswa, $pendaftaran->jalur, $key, $value);
 
-        if ($cekPersyaratan == '') {
-            DB::transaction(function () use ($request, $pendaftaran, $service, $dService) {
-                //Update pendaftaran (state)
-                $this->updateState($pendaftaran->id, 'menyelesaikan_pemberkasan');
+                if ($keterangan != '') {
+                    $cek_sistem = false;
+                    if ($pendaftaran->jalur != 'undangan-petani' ||
+                        $pendaftaran->jalur != 'undangan-smk') {
+                        $rollback = true;
+                        break;
+                    }
+                }
 
-                //Simpan dokumen
-                $dService->createPendaftaranDokumen($pendaftaran->id, $request);
-            });
-        } else {
-            if ($pendaftaran->jalur == 'undangan-petani' ||
-                $pendaftaran->jalur == 'undangan-smk') {
-                DB::transaction(function () use ($request, $pendaftaran, $service, $dService, $cekPersyaratan) {
-                    //Update pendaftaran (state)
-                    $this->updateState($pendaftaran->id, 'menyelesaikan_pemberkasan');
-                    $service->updatePendaftaran($pendaftaran->id, ['keterangan' => $cekPersyaratan]);
-
-                    //Simpan dokumen
-                    $dService->createPendaftaranDokumen($pendaftaran->id, $request);
-                });
-            } else {
-                return Redirect::to('pendaftaran')->withError($cekPersyaratan);
+                $dService->createPendaftaranDetail([
+                    'pendaftaran_id' => $pendaftaran->id,
+                    'key' => $key,
+                    'value' => $value,
+                    'cek_sistem' => $cek_sistem,
+                    'cek_admin' => true,
+                    'keterangan' => $keterangan,
+                    'kelompok' => 'biodata'
+                ]);
             }
         }
+
+        if ($rollback) {
+            DB::rollBack();
+            return Redirect::to('pendaftaran')->withError($keterangan);
+        }
+
+        //insert dokumen ke pendaftaran detail
+        $data = $request->except(['_token']);
+        foreach ($data as $key => $value) {
+            $cek_sistem = true;
+            $keterangan = $this->cekPersyaratan($siswa, $pendaftaran->jalur, $key, $value);
+
+            if ($keterangan != '') {
+                $cek_sistem = false;
+                if ($pendaftaran->jalur != 'undangan-petani' ||
+                    $pendaftaran->jalur != 'undangan-smk') {
+                    $rollback = true;
+                    break;
+                }
+            }
+
+            if ( $request->hasFile($key) ) {
+                $value = $request->file($key)->store("pendaftaran");
+            }
+
+            $dService->createPendaftaranDetail([
+                'pendaftaran_id' => $pendaftaran->id,
+                'key' => $key,
+                'value' => $value,
+                'cek_sistem' => $cek_sistem,
+                'cek_admin' => true,
+                'keterangan' => $keterangan,
+                'kelompok' => 'berkas'
+            ]);
+        }
+
+        $this->updateState($pendaftaran->id, 'menyelesaikan_pemberkasan');
+        DB::commit();
 
         return redirect()->route('pilih-jurusan');
     }
@@ -210,16 +250,31 @@ class PendaftaranController extends Controller
      * @param PendaftaranService $service
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store_jurusan(Request $request, PendaftaranService $service)
+    public function store_jurusan(Request $request,
+                                  PendaftaranService $service,
+                                  PendaftaranDetailService $dService)
     {
         $data = $request->only(['institusi', 'jurusan_1', 'jurusan_2']);
-
         if ($data['jurusan_1'] == $data['jurusan_2']) {
             return redirect()->back()->withError('Jurusan tidak boleh sama');
         }
 
+        $siswa = $request->user()->person;
         $pendaftaran = $this->getPendaftaran();
-        DB::transaction(function () use ($data, $pendaftaran, $service) {
+        DB::transaction(function () use ($data, $siswa, $pendaftaran, $service, $dService) {
+            $cek_sistem = true;
+            $keterangan = $this->cekJurusan($siswa, $data);
+
+            if ($keterangan != '') {
+                $cek_sistem = false;
+            }
+
+            //jika jurusan tidak cocok, update cek_sistem jurusan di biodata menjadi false
+            $dService->updatePendaftaranDetailByKey('jurusan', [
+                'cek_sistem' => $cek_sistem,
+                'keterangan' => $keterangan
+            ]);
+
             $service->updatePendaftaran($pendaftaran->id, [
                 'institusi' => $data['institusi'],
                 'jurusan_1' => $data['jurusan_1'],
@@ -237,67 +292,18 @@ class PendaftaranController extends Controller
      * @param VerifikasiDetailService $dService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function resume(Request $request,
-                           VerifikasiPendaftaranService $vService,
-                           VerifikasiDetailService $dService)
+    public function resume(Request $request, PendaftaranDetailService $service)
     {
-        //1. Ambil Data Siswa
-        $siswa = $request->user()->person;
-
-        //2. Ambil Data Pendaftaran
         $pendaftaran = $this->getPendaftaran();
         $pendaftaran['jalur_label'] = ucwords(str_replace("-", " ", $pendaftaran->jalur));
 
-        //3. Ambil Data Pendaftaran Dokumen
-        $dokumen = $pendaftaran->dokumen;
-
-        //4. Buat Verifikasi
-        //5. Buat Detail, Cek Masing-Masing Isian
-        DB::transaction(function () use ($siswa, $pendaftaran, $dokumen, $vService, $dService) {
-            $verifikasi = $vService->createVerifikasi([
-                'pendaftaran_id' => $pendaftaran->id,
-            ]);
-
-            $this->create_detail($pendaftaran, $verifikasi->getKey(), $siswa, $dService);
-        });
+        $detail = $service->getPendaftaranDetailByPendaftaran($pendaftaran->id);
+        dd($detail);
 
         return view('pendaftaran.resume', [
             'pendaftaran' => $pendaftaran,
-            'siswa' => $siswa
+            'detail' => $detail
         ]);
-    }
-
-    /**
-     * @param Pendaftaran $pendaftaran
-     * @param int $verifikasiId
-     * @param Siswa $siswa
-     * @param VerifikasiDetailService $service
-     */
-    private function create_detail(Pendaftaran $pendaftaran, int $verifikasiId, Siswa $siswa, VerifikasiDetailService $service)
-    {
-        foreach ($siswa->toArray() as $key => $value) {
-            if ($key != 'id' || $key != 'created_at' || $key != 'updated_at') {
-                $cek_sistem = true;
-
-                if ($pendaftaran->jalur == 'undangan-petani' ||
-                    $pendaftaran->jalur == 'undangan-smk') {
-
-                    if ($key == 'tinggi_badan') {
-                        $cek_sistem = $this->cekTinggiBadan($siswa->jenis_kelamin, $value);
-                    } else {
-                    }
-
-                }
-
-                $service->createDetail([
-                    'verifikasi_id' => $verifikasiId,
-                    'key' => $key,
-                    'value' => $value,
-                    'cek_sistem' => $cek_sistem,
-                    'cek_admin' => true,
-                ]);
-            }
-        }
     }
 
 }

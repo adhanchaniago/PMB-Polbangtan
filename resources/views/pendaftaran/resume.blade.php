@@ -23,26 +23,25 @@
 							<div class="form-group">
 								<label class="control-label col-sm-2">Jalur Pendaftaran</label>
 								<div class="col-sm-9">
-									<input type="text" id="nama" class="form-control" value="{{ $pendaftaran->jalur_label }}" readonly>
+									<input type="text" id="jalur" class="form-control" value="{{ $pendaftaran->jalur_label }}" readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-2">Tanggal Mendaftar</label>
 								<div class="col-sm-9">
-									<input type="text" id="nama" class="form-control" value="{{ $pendaftaran->created_at }}" readonly>
+									<input type="text" id="tanggal" class="form-control" value="{{ $pendaftaran->created_at }}" readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-2">Status</label>
 								<div class="col-sm-9">
-									<input type="text" id="nama" class="form-control" value="{{ ucwords(str_replace('_', ' ', $pendaftaran->state)) }}" readonly>
+									<input type="text" id="status" class="form-control" value="{{ ucwords(str_replace('_', ' ', $pendaftaran->state)) }}" readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-2">Keterangan</label>
 								<div class="col-sm-9">
-									<textarea id="nama" class="form-control" readonly>
-										{!! $pendaftaran->keterangan !!}
+									<textarea id="keterangan" class="form-control" readonly>
 									</textarea>
 								</div>
 							</div>
@@ -70,7 +69,7 @@
 							</ul>
 	          				<div id="myTabContent" class="tab-content">
 	            				<div role="tabpanel" class="tab-pane fade active in" id="tab_biodata" aria-labelledby="status-tab">
-                    				
+
 	                			</div>
 	                			<div role="tabpanel" class="tab-pane fade" id="tab_dokumen" aria-labelledby="info-tab">
 

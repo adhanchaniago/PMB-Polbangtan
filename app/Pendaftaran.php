@@ -18,7 +18,7 @@ class Pendaftaran extends Model
 
     public function dokumen()
     {
-    	return $this->hasMany('App\PendaftaranDokumen', 'pendaftaran_id');
+    	return $this->hasMany('App\PendaftaranDetail', 'pendaftaran_id');
     }
 
     public static function createPendaftaran(array $data)
