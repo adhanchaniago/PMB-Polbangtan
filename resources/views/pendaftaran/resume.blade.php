@@ -25,7 +25,6 @@
 				<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
 					<form action="{{ route('pendaftaran.store') }}" method="post">
 						{{ csrf_field() }}
-						<input type="hidden" name="id" value="{{ $pendaftaran->id }}">
 						<button type="submit" class="btn btn-app">
 							<i class="fa fa-save"></i> Submit Pendaftaran
 						</button>

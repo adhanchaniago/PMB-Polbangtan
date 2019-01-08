@@ -52,8 +52,17 @@
 						</tr>
 						<tr>
 							<td>Nomor Pendaftaran</td>
-							<td></td>
+							<td>{{ $pendaftaran->no_pendaftaran ?? '-' }}</td>
 						</tr>
+						@if( $pendaftaran !== null)
+						<tr>
+							<td colspan="2">
+								<a href="{{ route('siswa.kartu') }}" class="btn btn-success">
+									Unduh Kartu Peserta
+								</a>
+							</td>
+						</tr>
+						@endif
 					</tbody>
 				</table>
 			</div>

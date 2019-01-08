@@ -57,5 +57,6 @@ Route::group(['middleware' => 'auth'], function ()
 		Route::post('jurusan/simpan-jurusan', 'PendaftaranController@store_jurusan')->name('store-jurusan');
 		Route::resource('prestasi', 'PrestasiController');
 		Route::get('resume', 'PendaftaranController@resume')->name('pendaftaran.resume');
+        Route::get('siswa/kartu/cetak', 'SiswaController@kartu')->name('siswa.kartu');
 	});
 });

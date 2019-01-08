@@ -28,11 +28,15 @@
 						<input type="text" id="nama" class="form-control" value="{{ ucwords(str_replace('_', ' ', $data->state)) }}" readonly>
 					</div>
 				</div>
+				@if($data->state == 'start' ||
+					$data->state == 'pemilihan_jurusan' ||
+					$data->state == 'review_pendaftaran')
 				<div class="form-group">
 					<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2">
 						<button type="submit" class="btn btn-danger">Batalkan Pendaftaran</button>
 					</div>
 				</div>
+				@endif
 			</form>
 		</div>
 	</div>

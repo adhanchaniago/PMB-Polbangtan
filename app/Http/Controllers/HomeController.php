@@ -31,16 +31,19 @@ class HomeController extends Controller
     	$data = $request->user()->person;
     	$kelengkapan = true;
     	$state = '';
+    	$pendaftaran = '';
 
     	if ( $request->user()->person_type == 'siswa' ) {
     		$kelengkapan = $this->cekKelengkapanDokumen();
     		$state = $this->getPendaftaranState();
+            $pendaftaran = $this->getPendaftaran();
     	}
 
         return view('home', [
         	'data' => $data,
         	'kelengkapan' => $kelengkapan,
-        	'state' => $state
+        	'state' => $state,
+            'pendaftaran' => $pendaftaran
         ]);
     }
 

@@ -7,6 +7,7 @@ use App\Jurusan;
 use App\Libs\Services\PendaftaranDetailService;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Services\PrestasiService;
+use App\Libs\Services\SerialNumberService;
 use App\Libs\Services\VerifikasiDetailService;
 use App\Libs\Services\VerifikasiPendaftaranService;
 use App\Libs\Traits\InfoPendaftaran;
@@ -63,18 +64,24 @@ class PendaftaranController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param PendaftaranService $service
+     * @return mixed
+     * @throws \Throwable
      */
-    public function store(Request $request, PendaftaranService $service)
+    public function store(Request $request,
+                          PendaftaranService $service,
+                          SerialNumberService $sService)
     {
-        DB::transaction(function () use ($request, $service) {
+        $pendaftaran = $this->getPendaftaran();
 
-            $this->updateState($request->id, 'menyelesaikan_pendaftaran');
+        DB::transaction(function () use ($pendaftaran, $service, $sService) {
+            $no_pendaftaran = $sService->getSerialNumber($pendaftaran->institusi);
+
+            $service->updatePendaftaran($pendaftaran->id, ['no_pendaftaran' => $no_pendaftaran]);
+
+            $this->updateState($pendaftaran->id, 'menyelesaikan_pendaftaran');
         });
-
 
         return Redirect::to('pendaftaran')->withSuccess('Pendaftaran berhasil disubmit');
     }
