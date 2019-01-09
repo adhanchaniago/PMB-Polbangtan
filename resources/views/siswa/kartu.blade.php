@@ -26,10 +26,8 @@
             <img src="{{ route('viewfile') . '?file=' . $siswa->foto }}" style="width: 150px; height: auto;">
         </td>
         <td style="width: 350px;">
-            <p>
-                Nomor Pendaftaran:<br/>
-                <strong>{{ $pendaftaran->no_pendaftaran }}</strong>
-            </p>
+            Nomor Pendaftaran:<br/>
+            <strong>{{ $pendaftaran->no_pendaftaran }}</strong>
             <p>
                 Nama Siswa:<br/>
                 {{ $siswa->nama }}
@@ -52,7 +50,7 @@
             </p>
         </td>
     </tr>
-    <tr>
+    <tr bgcolor="#d3d3d3">
         <td colspan="2"><strong>Pilihan Institusi & Jurusan</strong></td>
     </tr>
     <tr>
