@@ -19,8 +19,8 @@
             <img src="{{ asset('images/logo.png') }}" style="width: 75px; height: auto;">
         </td>
         <td style="width: 425px; text-align: center; border-left: 0px">
-            <span style="font-size: 16px; font-weight: bold;">KARTU TANDA PESERTA</span><br/>
-            <span style="font-size: 16px; font-weight: bold;">POLITEKNIK PEMBANGUNAN PERTANIAN</span> <br/>
+            <span style="font-size: 18px; font-weight: bold;">KARTU TANDA PESERTA</span><br/>
+            <span style="font-size: 18px; font-weight: bold;">POLITEKNIK PEMBANGUNAN PERTANIAN</span> <br/>
         </td>
     </tr>
     <tr>
