@@ -1,27 +1,34 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Kartu Peserta</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 2px solid black;
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
 <table>
     <tr>
-        <td width="100px"><img src="{{ asset('images/logo.png') }}" style="width: 75px; height: auto;"></td>
-        <td style="text-align: center;">
-            <span style="font-size: 16px; font-weight: bold;">KARTU TANDA PESERTA</span><br />
-            <span style="font-size: 16px; font-weight: bold;">POLITEKNIK PEMBANGUNAN PERTANIAN</span> <br />
+        <td style="width: 75px; border-right: 0px"><img src="{{ asset('images/logo.png') }}" style="width: 75px; height: auto;"></td>
+        <td style="width: 425px; text-align: center; border-left: 0px">
+            <span style="font-size: 16px; font-weight: bold;">KARTU TANDA PESERTA</span><br/>
+            <span style="font-size: 16px; font-weight: bold;">POLITEKNIK PEMBANGUNAN PERTANIAN</span> <br/>
         </td>
-    </tr>
-    <tr>
-        <td colspan="2"><hr size="3"/></td>
     </tr>
 </table>
+<br/>
 <table>
     <tr>
-        <td>
-            <img src="{{ route('viewfile') . '?file=' . $siswa->foto }}" style="width: 200px; height: auto">
+        <td style="width: 150px; vertical-align: top;">
+            <img src="{{ route('viewfile') . '?file=' . $siswa->foto }}" style="width: 150px; height: auto;">
         </td>
-        <td>
+        <td style="width: 350px;">
             <p>
                 Nomor Pendaftaran:<br/>
                 <strong>{{ $pendaftaran->no_pendaftaran }}</strong>
@@ -49,16 +56,18 @@
         </td>
     </tr>
 </table>
-<h2>Pilihan Institusi & Jurusan</h2>
+<br /><strong>Pilihan Institusi & Jurusan</strong>
 <table>
     <tr>
-        <td>{{ $pendaftaran->minstitusi->nama }}</td>
+        <td colspan="2">{{ $pendaftaran->minstitusi->nama }}</td>
     </tr>
     <tr>
-        <td>1. {{ $pendaftaran->jurusan_1_label }}</td>
+        <td style="width: 30px;">1.</td>
+        <td style="width: 470px;">{{ $pendaftaran->jurusan_1_label }}</td>
     </tr>
     <tr>
-        <td>2. {{ $pendaftaran->jurusan_2_label }}</td>
+        <td>2.</td>
+        <td>{{ $pendaftaran->jurusan_2_label }}</td>
     </tr>
 </table>
 </body>

@@ -6,7 +6,8 @@ use App\Jurusan;
 use App\Libs\Services\SiswaService;
 use App\Libs\Traits\InfoSiswa;
 use Illuminate\Http\Request;
-use PDF, Redirect;
+use PDF;
+use Redirect;
 
 class SiswaController extends Controller
 {
@@ -35,7 +36,7 @@ class SiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,7 +47,7 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id, Request $request)
@@ -54,14 +55,14 @@ class SiswaController extends Controller
         $data = $request->user()->person;
 
         return view('siswa.show', [
-        	'data' => $data
+            'data' => $data
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,19 +73,19 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id, SiswaService $service)
     {
-    	$this->validate($request,[
+        $this->validate($request, [
             'nama' => 'required',
             'alamat' => 'required',
             'kelurahan' => 'required',
             'kecamatan' => 'required',
             'kota' => 'required',
-        	'provinsi' => 'required',
+            'provinsi' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'foto' => 'max:2000',
@@ -100,16 +101,16 @@ class SiswaController extends Controller
             'sk_tidak_hamil' => 'max:2000',
         ]);
 
-        
-    	$service->updateSiswa($id, $request);
 
-        return Redirect::to('siswa/'.$id)->withSuccess('Data siswa berhasil diperbaharui');
+        $service->updateSiswa($id, $request);
+
+        return Redirect::to('siswa/' . $id)->withSuccess('Data siswa berhasil diperbaharui');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -124,9 +125,16 @@ class SiswaController extends Controller
         $pendaftaran['jurusan_1_label'] = Jurusan::selectName($pendaftaran->jurusan_1);
         $pendaftaran['jurusan_2_label'] = Jurusan::selectName($pendaftaran->jurusan_2);
 
-        return view('siswa.kartu', [
+        $pdf = PDF::loadView('siswa.kartu', [
             'siswa' => $siswa,
             'pendaftaran' => $pendaftaran
         ]);
+
+        return $pdf->stream();
+
+        /*return view('siswa.kartu', [
+            'siswa' => $siswa,
+            'pendaftaran' => $pendaftaran
+        ]);*/
     }
 }
