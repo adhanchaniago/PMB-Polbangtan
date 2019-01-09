@@ -10,5 +10,7 @@ interface SiswaContract
 
     public function getSiswaById(int $id);
 
+    public function paginateSiswa(String $keyword);
+
     public function updateSiswa(int $id, Request $request);
 }

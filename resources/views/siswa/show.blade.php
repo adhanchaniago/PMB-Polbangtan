@@ -12,6 +12,7 @@
 		<div class="clearfix"></div>
 
 		<div class="row">
+			@if (Auth::user()->person_type == 'siswa')
 			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
 				<button type="button" id="button_edit" class="btn btn-app" onclick="enable_input()">
 					<i class="fa fa-edit"></i> Edit
@@ -23,6 +24,7 @@
 					<i class="fa fa-save"></i> Simpan
 				</button>
 			</div>
+			@endif
 
 			{{ Form::model($data, array('route' => array('siswa.update', $data->id), 'id' => 'form_siswa', 'method' => 'PUT', 'class' => 'form-horizontal form-label-left', 'enctype' => 'multipart/form-data')) }}
 

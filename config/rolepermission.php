@@ -104,6 +104,7 @@ return [
                 'jadwal_create',
                 'jadwal_update',
                 'jadwal_delete',
+                'pendaftaran',
                 'verifikasi_dokumen',
                 'tes_wawancara',
                 'tes_kesehatan',
@@ -118,6 +119,7 @@ return [
             	'master_data',
                 'siswa_read',
                 'jadwal_read',
+                'pendaftaran',
                 'tes_tulis'
             ],
         ],

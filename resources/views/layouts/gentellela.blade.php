@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>{{ config('app.name') }}</title>
 
@@ -176,6 +177,7 @@
 	<script src="{{ asset('gentellela/vendors/jquery/dist/jquery.min.js') }}"></script>
 	<!-- Bootstrap -->
 	<script src="{{ asset('gentellela/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
 	<!-- FastClick -->
 	<script src="{{ asset('gentellela/vendors/fastclick/lib/fastclick.js') }}"></script>
 	<!-- NProgress -->
@@ -204,6 +206,8 @@
 
     <!-- Chart.js -->
     <script src="{{ asset('gentellela/vendors/Chart.js/dist/Chart.min.js') }}"></script>
+
+	<script type="text/javascript" src="{!!asset('js/app.js')!!}"></script>
 
 	<!-- Pages Script -->
 	@yield('js')

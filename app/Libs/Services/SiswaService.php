@@ -38,12 +38,16 @@ class SiswaService implements SiswaContract
     	return $this->model->findOrFail($id);
     }
 
+    public function paginateSiswa(String $keyword)
+    {
+        return $this->model->where('nama', 'like', '%' . $keyword . '%')->paginate(15);
+    }
+
     /**
-     * [updateSiswa]
-     * @param  int    $id
-     * @param  array  $data
+     * @param int $id
+     * @param Request $request
      */
-    public function updateSiswa(int $id, Request $request) : Void
+    public function updateSiswa(int $id, Request $request)
     {
     	$data = $request->except(['_token', '_method']);
 

@@ -46,9 +46,8 @@ class UserService implements UserContract
     }
 
     /**
-     * [updateUser]
-     * @param  int    $id
-     * @param  array  $data
+     * @param int $id
+     * @param array $data
      * @return User
      */
     public function updateUser(int $id, array $data) : User

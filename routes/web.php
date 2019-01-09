@@ -49,7 +49,6 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::group(['middleware' => 'roles', 'roles' => 'siswa'], function ()
     {
-		Route::resource('siswa', 'SiswaController');
 		Route::resource('pendaftaran', 'PendaftaranController');
 		Route::get('pemilihan-jalur', 'PendaftaranController@jalur')->name('pilih-jalur');
 		Route::post('jalur/simpan-jalur', 'PendaftaranController@store_jalur')->name('store-jalur');
@@ -59,4 +58,15 @@ Route::group(['middleware' => 'auth'], function ()
 		Route::get('resume', 'PendaftaranController@resume')->name('pendaftaran.resume');
         Route::get('siswa/kartu/cetak', 'SiswaController@kartu')->name('siswa.kartu');
 	});
+
+    Route::group(['middleware' => 'roles', 'roles' => ['siswa', 'admin_pusat']], function ()
+    {
+        Route::resource('siswa', 'SiswaController');
+    });
+
+    Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
+        Route::group(['prefix' => '/siswa'], function () {
+            Route::get('/', 'SiswaController@index')->name('api.siswa');
+        });
+    });
 });

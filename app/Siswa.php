@@ -8,6 +8,11 @@ class Siswa extends Model
 {
     protected $guarded = [];
 
+    public function user()
+    {
+        return $this->morphOne('App\User', 'person');
+    }
+
     public static function createSiswa(array $data)
     {
 	    return Siswa::create($data);

@@ -20,7 +20,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        return view('siswa.index', [
+            'urlSiswaList' => route('api.siswa')
+        ]);
     }
 
     /**
@@ -50,9 +52,13 @@ class SiswaController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id, Request $request, SiswaService $service)
     {
-        $data = $request->user()->person;
+        if ($request->user()->person_type == 'siswa') {
+            $data = $request->user()->person;
+        } else {
+            $data = $service->getSiswaById($id);
+        }
 
         return view('siswa.show', [
             'data' => $data
