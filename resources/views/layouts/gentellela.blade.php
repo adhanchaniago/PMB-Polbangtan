@@ -173,15 +173,10 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script src="{{ asset('gentellela/vendors/jquery/dist/jquery.min.js') }}"></script>
-	<!-- Bootstrap -->
-	<script src="{{ asset('gentellela/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{!!asset('js/app.js')!!}"></script>
 
 	<!-- FastClick -->
 	<script src="{{ asset('gentellela/vendors/fastclick/lib/fastclick.js') }}"></script>
-	<!-- NProgress -->
-	<script src="{{ asset('gentellela/vendors/nprogress/nprogress.js') }}"></script>
 	<!-- bootstrap-progressbar -->
 	<script src="{{ asset('gentellela/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
 	<!-- iCheck -->
@@ -206,8 +201,6 @@
 
     <!-- Chart.js -->
     <script src="{{ asset('gentellela/vendors/Chart.js/dist/Chart.min.js') }}"></script>
-
-	<script type="text/javascript" src="{!!asset('js/app.js')!!}"></script>
 
 	<!-- Pages Script -->
 	@yield('js')
