@@ -43963,11 +43963,11 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "x_content" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "col-md-6 col-sm-12 col-xs-12" }, [
               _c(
                 "form",
                 {
-                  staticClass: "form-inline",
+                  staticClass: "form-horizontal form-label-left",
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
@@ -43977,38 +43977,47 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "search-siswa" } }, [
-                      _vm._v("Cari siswa")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keyword,
-                          expression: "keyword"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "search-siswa",
-                        placeholder: "Nama siswa"
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 control-label",
+                        attrs: { for: "search-siswa" }
                       },
-                      domProps: { value: _vm.keyword },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                      [_vm._v("Cari siswa")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.keyword,
+                              expression: "keyword"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "search-siswa",
+                            placeholder: "Nama siswa"
+                          },
+                          domProps: { value: _vm.keyword },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.keyword = $event.target.value
+                            }
                           }
-                          _vm.keyword = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1)
+                        }),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ])
+                    ])
+                  ])
                 ]
               )
             ])
@@ -44016,7 +44025,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
-              _c("strong", [_vm._v(_vm._s(_vm.total) + " siswa")])
+              _c("strong", [_vm._v("Total: (" + _vm._s(_vm.total) + ") siswa")])
             ])
           ]),
           _vm._v(" "),
@@ -44106,14 +44115,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-      [
-        _c("i", { staticClass: "glyphicon glyphicon-search" }),
-        _vm._v(" Tampilkan\n                            ")
-      ]
-    )
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Go!")]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -44475,6 +44483,10 @@ if (false) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SimplePagination_vue__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SimplePagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__SimplePagination_vue__);
+//
+//
+//
+//
 //
 //
 //

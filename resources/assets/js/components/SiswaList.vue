@@ -8,22 +8,26 @@
                 </div>
                 <div class="x_content">
                     <div class="row">
-                        <div class="col-md-12">
-                            <form class="form-inline" @submit.prevent="search">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <form class="form-horizontal form-label-left" @submit.prevent="search">
                                 <div class="form-group">
-                                    <label for="search-siswa">Cari siswa</label>
-                                    <input type="text" class="form-control" id="search-siswa" placeholder="Nama siswa" v-model="keyword">
+                                    <label for="search-siswa" class="col-sm-3 control-label">Cari siswa</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="search-siswa" placeholder="Nama siswa" v-model="keyword">
+                                            <span class="input-group-btn">
+                                              <button type="button" class="btn btn-primary">Go!</button>
+                                          </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="glyphicon glyphicon-search"></i> Tampilkan
-                                </button>
                             </form>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-                            <strong>{{ total }} siswa</strong>
+                            <strong>Total: ({{ total }}) siswa</strong>
                         </div>
                     </div>
 
