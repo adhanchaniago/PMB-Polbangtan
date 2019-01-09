@@ -21,9 +21,6 @@
             <span style="font-size: 16px; font-weight: bold;">POLITEKNIK PEMBANGUNAN PERTANIAN</span> <br/>
         </td>
     </tr>
-</table>
-<br/>
-<table>
     <tr>
         <td style="width: 150px; vertical-align: top;">
             <img src="{{ route('viewfile') . '?file=' . $siswa->foto }}" style="width: 150px; height: auto;">
@@ -55,9 +52,9 @@
             </p>
         </td>
     </tr>
-</table>
-<br /><strong>Pilihan Institusi & Jurusan</strong>
-<table>
+    <tr>
+        <td colspan="2"><strong>Pilihan Institusi & Jurusan</strong></td>
+    </tr>
     <tr>
         <td colspan="2">{{ $pendaftaran->minstitusi->nama }}</td>
     </tr>
