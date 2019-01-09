@@ -15,7 +15,9 @@
 <body>
 <table>
     <tr>
-        <td style="width: 75px; border-right: 0px"><img src="{{ asset('images/logo.png') }}" style="width: 75px; height: auto;"></td>
+        <td style="width: 75px; text-align: center; border-right: 0px">
+            <img src="{{ asset('images/logo.png') }}" style="width: 75px; height: auto;">
+        </td>
         <td style="width: 425px; text-align: center; border-left: 0px">
             <span style="font-size: 16px; font-weight: bold;">KARTU TANDA PESERTA</span><br/>
             <span style="font-size: 16px; font-weight: bold;">POLITEKNIK PEMBANGUNAN PERTANIAN</span> <br/>
@@ -61,8 +63,8 @@
         <td style="width: 470px;">{{ $pendaftaran->jurusan_1_label }}</td>
     </tr>
     <tr>
-        <td>2.</td>
-        <td>{{ $pendaftaran->jurusan_2_label }}</td>
+        <td style="width: 30px;">2.</td>
+        <td style="width: 470px;">{{ $pendaftaran->jurusan_2_label }}</td>
     </tr>
 </table>
 </body>
