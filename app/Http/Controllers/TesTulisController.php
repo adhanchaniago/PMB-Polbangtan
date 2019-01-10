@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TesTulisExport;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Traits\InfoOperator;
 use App\Libs\Traits\InstitusiJurusan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class TesTulisController extends Controller
@@ -117,5 +119,16 @@ class TesTulisController extends Controller
             'pendaftaran' => $pendaftaran,
             'institusi' => $institusi
         ]);*/
+    }
+
+    public function xls(PendaftaranService $service)
+    {
+        $institusi = $this->getInstitusi();
+        $pendaftaran = $service->searchPendaftaran([
+            'institusi' => $institusi->id,
+            'state' => 'tes_tulis'
+        ]);
+
+        return Excel::download(new TesTulisExport($pendaftaran), 'daftar_peserta.xlsx');
     }
 }

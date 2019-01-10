@@ -15,7 +15,9 @@
                 <a class="btn btn-primary" href="{{ route('tes-tulis.pdf') }}" target="_blank">
                     <i class="fa fa-download"></i> Download Daftar Peserta Ujian
                 </a>
-                <a class="btn btn-success">
+                <a class="btn btn-success"
+                   data-toggle="modal"
+                   data-target="#modal_upload">
                     <i class="fa fa-upload"></i> Upload Hasil Ujian
                 </a>
             </div>
@@ -26,6 +28,33 @@
                     title="Daftar Peserta Tes Tulis"
                     show-detail="no"></pendaftaran-list>
             </div>
+        </div>
+    </div>
+
+    <div id="modal_upload" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <form action="{{ route('tes-tulis.store') }}" id="form_upload" method="post" class="modal-content">
+                {{ csrf_field() }}
+
+                <div class="modal-header bg-primary-600">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Upload Hasil Ujian Tulis</h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Hasil Ujian</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="hasil_ujian_add" required class="form-control" name="hasil_ujian" accept=".xlsx">
+                            <a href="{{ route('tes-tulis.xls') }}">Download Data Awal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><b><i class="fa fa-close"></b></i> Batal</button>
+                    <button type="submit" class="btn btn-success"><b><i class="fa fa-save"></i></b> Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
