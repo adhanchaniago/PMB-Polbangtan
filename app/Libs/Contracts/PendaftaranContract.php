@@ -10,5 +10,9 @@ interface PendaftaranContract
 
     public function getPendaftaranBySiswa(int $siswaId);
 
+    public function getPendaftaranById(int $id);
+
+    public function paginatePendaftaran(array $filter);
+
     public function updatePendaftaran(int $id, array $data);
 }

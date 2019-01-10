@@ -47,6 +47,11 @@ Route::group(['middleware' => 'auth'], function ()
 		Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 	});
 
+    Route::group(['middleware' => 'roles', 'roles' => ['siswa', 'admin_pusat']], function ()
+    {
+        Route::resource('siswa', 'SiswaController');
+    });
+
     Route::group(['middleware' => 'roles', 'roles' => 'siswa'], function ()
     {
 		Route::resource('pendaftaran', 'PendaftaranController');
@@ -59,14 +64,17 @@ Route::group(['middleware' => 'auth'], function ()
         Route::get('siswa/kartu/cetak', 'SiswaController@kartu')->name('siswa.kartu');
 	});
 
-    Route::group(['middleware' => 'roles', 'roles' => ['siswa', 'admin_pusat']], function ()
+    Route::group(['middleware' => 'roles', 'roles' => 'admin_pusat'], function ()
     {
-        Route::resource('siswa', 'SiswaController');
+        Route::resource('verifikasi-dokumen', 'VerifikasiDokumenController');
     });
 
     Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
         Route::group(['prefix' => '/siswa'], function () {
             Route::get('/', 'SiswaController@index')->name('api.siswa');
+        });
+        Route::group(['prefix' => '/verifikasi-dokumen'], function () {
+            Route::get('/', 'VerifikasiDokumenController@index')->name('api.verifikasi');
         });
     });
 });

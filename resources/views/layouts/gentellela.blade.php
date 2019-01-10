@@ -70,10 +70,10 @@
 										<li><a href="{{ route('siswa.index') }}">Data Siswa</a></li>
 										@endcan
 										@can('user_read')
-										<li><a href="#">Data User</a></li>
+										{{--<li><a href="#">Data User</a></li>--}}
 										@endcan
 										@can('jadwal_read')
-										<li><a href="#">Jadwal Pendaftaran</a></li>
+										{{--<li><a href="#">Jadwal Pendaftaran</a></li>--}}
 										@endcan
 									</ul>
 								</li>
@@ -88,7 +88,7 @@
 										<li><a href="{{ route('pendaftaran.index') }}">Daftar PMB</a></li>
 										@endcan
 										@can('verifikasi_dokumen')
-										<li><a href="#">Verifikasi Dokumen</a></li>
+										<li><a href="{{ route('verifikasi-dokumen.index') }}">Verifikasi Dokumen</a></li>
 										@endcan
 										@can('tes_tulis')
 										<li><a href="#">Tes Tulis</a></li>
@@ -106,14 +106,14 @@
 								</li>
 								@endcan
 								@can('cms')
-								<li><a><i class="fa fa-edit"></i> CMS <span class="fa fa-chevron-down"></span></a>
+								{{--<li><a><i class="fa fa-edit"></i> CMS <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a href="#">Hubungi Kami</a></li>
 										<li><a href="#">Informasi Pendaftaran</a></li>
 										<li><a href="#">Brosur PMB</a></li>
 										<li><a href="#">Dokumen Persyaratan</a></li>
 									</ul>
-								</li>
+								</li>--}}
 								@endcan
 							</ul>
 						</div>

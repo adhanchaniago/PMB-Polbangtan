@@ -26,6 +26,11 @@ class Pendaftaran extends Model
         return $this->hasOne('App\Institusi', 'id', 'institusi');
     }
 
+    public function siswa()
+    {
+        return $this->hasOne('App\Siswa', 'id', 'siswa_id');
+    }
+
     public static function createPendaftaran(array $data)
     {
 	    return Pendaftaran::create($data);
@@ -47,5 +52,22 @@ class Pendaftaran extends Model
         }
 
         return $query->get();
+    }
+
+    public function paginatePendaftaran(array $filter)
+    {
+        $query = $this->newQuery();
+
+        if (isset($filter['siswa_id'])) {
+            $query->where('siswa_id', $filter['siswa_id']);
+        }
+        if (isset($filter['no_pendaftaran'])) {
+            $query->where('no_pendaftaran', $filter['no_pendaftaran']);
+        }
+        if (isset($filter['state'])) {
+            $query->where('state', $filter['state']);
+        }
+
+        return $query->with('siswa')->paginate(15);
     }
 }

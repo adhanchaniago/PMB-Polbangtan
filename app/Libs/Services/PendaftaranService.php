@@ -21,9 +21,19 @@ class PendaftaranService implements PendaftaranContract
     	$this->model->createPendaftaran($data);
     }
 
+    public function getPendaftaranById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
     public function getPendaftaranBySiswa(int $siswaId) : ?Collection
     {
     	return $this->model->querySearch(['siswa_id' => $siswaId]);
+    }
+
+    public function paginatePendaftaran(array $filter)
+    {
+        return $this->model->paginatePendaftaran($filter);
     }
 
     public function updatePendaftaran(int $id, array $data)

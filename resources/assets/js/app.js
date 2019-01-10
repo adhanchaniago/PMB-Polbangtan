@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('pendaftaran-list', require('./components/PendaftaranList.vue'));
 Vue.component('siswa-list', require('./components/SiswaList.vue'));
 Vue.component('simple-pagination', require('./components/SimplePagination.vue'));
 

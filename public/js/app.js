@@ -1097,6 +1097,7 @@ window.Vue = __webpack_require__(36);
  */
 
 Vue.component('example-component', __webpack_require__(39));
+Vue.component('pendaftaran-list', __webpack_require__(69));
 Vue.component('siswa-list', __webpack_require__(45));
 Vue.component('simple-pagination', __webpack_require__(63));
 
@@ -44647,6 +44648,470 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(70)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(72)
+/* template */
+var __vue_template__ = __webpack_require__(73)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-00a5f0ce"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/PendaftaranList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00a5f0ce", Component.options)
+  } else {
+    hotAPI.reload("data-v-00a5f0ce", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(71);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(60)("509a3f36", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00a5f0ce\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PendaftaranList.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00a5f0ce\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PendaftaranList.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(49)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.clickable[data-v-00a5f0ce] {cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SimplePagination_vue__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SimplePagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__SimplePagination_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "PendaftaranList",
+
+    components: {
+        SimplePagination: __WEBPACK_IMPORTED_MODULE_0__SimplePagination_vue___default.a
+    },
+
+    props: {
+        urlDataList: String
+    },
+
+    data: function data() {
+        return {
+            keyword: '',
+            pendaftaranList: [],
+            loading: false,
+            pagerRef: null
+        };
+    },
+
+
+    computed: {
+        currentPage: function currentPage() {
+            if (this.pagerRef) {
+                return this.pagerRef.pageData.currentPage;
+            }
+        },
+
+        perPage: function perPage() {
+            if (this.pagerRef) {
+                return this.pagerRef.pageData.perPage;
+            }
+        },
+
+        total: function total() {
+            if (this.pagerRef) {
+                return this.pagerRef.pageData.total;
+            }
+        },
+
+        queryStringSuffix: function queryStringSuffix() {
+            return 'q=' + this.keyword;
+        }
+    },
+
+    methods: {
+        search: function search() {
+            console.log('search');
+            this.pagerRef.loadData(this.urlDataList + '?' + this.queryStringSuffix);
+        },
+
+        clearData: function clearData() {
+            console.log('clear');
+            this.loading = true;
+        },
+
+        displayError: function displayError(e) {
+            console.log(e);
+            this.loading = false;
+        },
+
+        selectPendaftaran: function selectPendaftaran(id) {
+            console.log(id);
+            window.location.href = "verifikasi-dokumen/" + id;
+        },
+
+        displayData: function displayData(resp) {
+            var vm = this;
+            vm.pendaftaranList = resp.data.map(function (item) {
+                return {
+                    ID: item.id,
+                    no_pendaftaran: item.no_pendaftaran,
+                    tanggal: item.created_at,
+                    siswa: item.siswa.nama
+                };
+            });
+
+            vm.pendaftaranList.sort(dynamicSortMultiple('no_pendaftaran', 'tanggal'));
+
+            this.loading = false;
+        },
+
+        pagerMounted: function pagerMounted() {
+            this.pagerRef = this.$refs.pager;
+        }
+    }
+});
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-12 col-sm-12 col-xs-12" }, [
+      _c("div", { staticClass: "x_panel" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "x_content" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-8 col-sm-12 col-xs-12" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "form-horizontal form-label-left",
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.search($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-sm-4 control-label" }, [
+                      _vm._v("Cari No Pendaftaran")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.keyword,
+                              expression: "keyword"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "search-pendaftaran",
+                            placeholder: "No Pendaftaran"
+                          },
+                          domProps: { value: _vm.keyword },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.keyword = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("strong", [
+                _vm._v("Total: (" + _vm._s(_vm.total) + ") pendaftaran")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table table-striped" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.pendaftaranList, function(pendaftaran, index) {
+                      return _c(
+                        "tr",
+                        {
+                          staticClass: "clickable",
+                          on: {
+                            click: function($event) {
+                              _vm.selectPendaftaran(pendaftaran.ID)
+                            }
+                          }
+                        },
+                        [
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.currentPage - 1) * _vm.perPage +
+                                  (index + 1)
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(pendaftaran.no_pendaftaran))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(pendaftaran.tanggal))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(pendaftaran.siswa))])
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("tfoot")
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-footer text-center" },
+            [
+              _c("simple-pagination", {
+                ref: "pager",
+                attrs: {
+                  "base-url": _vm.urlDataList,
+                  "query-param": _vm.queryStringSuffix
+                },
+                on: {
+                  "loading-data": _vm.clearData,
+                  "data-loaded": _vm.displayData,
+                  "load-failed": _vm.displayError,
+                  mounted: _vm.pagerMounted
+                }
+              })
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "x_title" }, [
+      _c("h2", [_vm._v("Daftar Pendaftaran")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Go!")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v(" ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("No Pendaftaran")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tanggal Pendaftaran")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nama Siswa")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00a5f0ce", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
