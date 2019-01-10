@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return Redirect::to('login');
+    return view('welcome');
 });
 Route::get('/register-success', function () {
     return view('auth.success');
