@@ -44834,7 +44834,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: {
         urlDataList: String,
-        title: String
+        title: String,
+        showDetail: String
     },
 
     data: function data() {
@@ -44889,7 +44890,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         selectPendaftaran: function selectPendaftaran(id) {
             console.log(id);
-            window.location.href = "verifikasi-dokumen/" + id;
+            if (this.showDetail == 'yes') {
+                window.location.href = "verifikasi-dokumen/" + id;
+            }
         },
 
         displayData: function displayData(resp) {

@@ -11,13 +11,22 @@
 
             <div class="clearfix"></div>
 
+            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
+                <a class="btn btn-primary" href="{{ route('tes-tulis.pdf') }}" target="_blank">
+                    <i class="fa fa-download"></i> Download Daftar Peserta Ujian
+                </a>
+                <a class="btn btn-success">
+                    <i class="fa fa-upload"></i> Upload Hasil Ujian
+                </a>
+            </div>
+
             <div id="app" class="container">
                 <pendaftaran-list
-                        url-data-list="{{ $urlDataList }}"
-                        title="Daftar Peserta Tes Tulis"></pendaftaran-list>
+                    url-data-list="{{ $urlDataList }}"
+                    title="Daftar Peserta Tes Tulis"
+                    show-detail="no"></pendaftaran-list>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 

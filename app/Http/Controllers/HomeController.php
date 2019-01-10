@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Libs\Services\UserService;
 use App\Libs\Traits\InfoOperator;
 use App\Libs\Traits\InfoSiswa;
+use App\Libs\Traits\InstitusiJurusan;
 use Illuminate\Http\Request;
 use Redirect;
 
 class HomeController extends Controller
 {
-	use InfoSiswa, InfoOperator;
+	use InfoOperator, InfoSiswa, InstitusiJurusan;
 
     /**
      * Create a new controller instance.

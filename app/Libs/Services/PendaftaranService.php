@@ -36,6 +36,11 @@ class PendaftaranService implements PendaftaranContract
         return $this->model->paginatePendaftaran($filter);
     }
 
+    public function searchPendaftaran(array $filter)
+    {
+        return $this->model->querySearch($filter);
+    }
+
     public function updatePendaftaran(int $id, array $data)
     {
     	$this->model->updatePendaftaran($id, $data);

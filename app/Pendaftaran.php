@@ -50,8 +50,17 @@ class Pendaftaran extends Model
         if (isset($filter['siswa_id'])) {
             $query->where('siswa_id', $filter['siswa_id']);
         }
+        if (isset($filter['institusi'])) {
+            $query->where('institusi', $filter['institusi']);
+        }
+        if (isset($filter['no_pendaftaran'])) {
+            $query->where('no_pendaftaran', $filter['no_pendaftaran']);
+        }
+        if (isset($filter['state'])) {
+            $query->where('state', $filter['state']);
+        }
 
-        return $query->get();
+        return $query->with('siswa')->get();
     }
 
     public function paginatePendaftaran(array $filter)
@@ -60,6 +69,9 @@ class Pendaftaran extends Model
 
         if (isset($filter['siswa_id'])) {
             $query->where('siswa_id', $filter['siswa_id']);
+        }
+        if (isset($filter['institusi'])) {
+            $query->where('institusi', $filter['institusi']);
         }
         if (isset($filter['no_pendaftaran'])) {
             $query->where('no_pendaftaran', $filter['no_pendaftaran']);

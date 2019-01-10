@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Institusi;
-use App\Jurusan;
 use App\Libs\Services\PendaftaranDetailService;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Services\PrestasiService;
@@ -12,13 +11,14 @@ use App\Libs\Services\VerifikasiDetailService;
 use App\Libs\Services\VerifikasiPendaftaranService;
 use App\Libs\Traits\InfoPendaftaran;
 use App\Libs\Traits\InfoSiswa;
+use App\Libs\Traits\InstitusiJurusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Redirect;
 
 class PendaftaranController extends Controller
 {
-    use InfoSiswa, InfoPendaftaran;
+    use InfoSiswa, InfoPendaftaran, InstitusiJurusan;
 
     /**
      * Display a listing of the resource.
@@ -251,7 +251,7 @@ class PendaftaranController extends Controller
         }
 
         $institusi = Institusi::all();
-        $jurusan = Jurusan::where('institusi_id', $institusi[0]->id)->get();
+        $jurusan = $this->getJurusan($institusi[0]->id);
 
         return view('pendaftaran.jurusan', [
             'institusi' => $institusi,
@@ -313,8 +313,8 @@ class PendaftaranController extends Controller
     {
         $pendaftaran = $this->getPendaftaran();
         $pendaftaran['jalur_label'] = ucwords(str_replace("-", " ", $pendaftaran->jalur));
-        $pendaftaran['jurusan_1_label'] = Jurusan::selectName($pendaftaran->jurusan_1);
-        $pendaftaran['jurusan_2_label'] = Jurusan::selectName($pendaftaran->jurusan_2);
+        $pendaftaran['jurusan_1_label'] = $this->getJurusanName($pendaftaran->jurusan_1);
+        $pendaftaran['jurusan_2_label'] = $this->getJurusanName($pendaftaran->jurusan_2);
 
         $detail = $service->getPendaftaranDetailByPendaftaran($pendaftaran->id);
         $biodata = $detail->map(function($item) {

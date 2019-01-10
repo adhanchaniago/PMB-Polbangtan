@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Libs\Services\PendaftaranService;
+use App\Libs\Traits\InfoOperator;
+use App\Libs\Traits\InstitusiJurusan;
 use Illuminate\Http\Request;
+use PDF;
 
 class TesTulisController extends Controller
 {
+    use InfoOperator, InstitusiJurusan;
+
     private $url = 'tes-tulis';
 
     /**
@@ -84,5 +90,32 @@ class TesTulisController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pdf(PendaftaranService $service)
+    {
+        $institusi = $this->getInstitusi();
+
+        $pendaftaran = $service->searchPendaftaran([
+            'institusi' => $institusi->id,
+            'state' => 'tes_tulis'
+        ]);
+        $pendaftaran = $pendaftaran->map(function($item) {
+            $item['jurusan_1_label'] = $this->getJurusanName($item->jurusan_1);
+            $item['jurusan_2_label'] = $this->getJurusanName($item->jurusan_2);
+
+            return $item;
+        });
+
+        $pdf = PDF::loadView($this->url . '.pdf', [
+            'pendaftaran' => $pendaftaran,
+            'institusi' => $institusi
+        ]);
+
+        return $pdf->stream();
+        /*return view($this->url . '.pdf', [
+            'pendaftaran' => $pendaftaran,
+            'institusi' => $institusi
+        ]);*/
     }
 }

@@ -84,7 +84,8 @@
 
         props: {
             urlDataList: String,
-            title: String
+            title: String,
+            showDetail: String
         },
 
         data() {
@@ -138,7 +139,9 @@
 
             selectPendaftaran: function(id) {
                 console.log(id);
-                window.location.href = "verifikasi-dokumen/" + id;
+                if (this.showDetail == 'yes') {
+                    window.location.href = "verifikasi-dokumen/" + id;
+                }
             },
 
             displayData: function (resp) {

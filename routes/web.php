@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::group(['middleware' => 'roles', 'roles' => 'operator'], function ()
     {
         Route::resource('tes-tulis', 'TesTulisController');
+        Route::get('tes-tulis/download/pdf', 'TesTulisController@pdf')->name('tes-tulis.pdf');
     });
 
     Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {

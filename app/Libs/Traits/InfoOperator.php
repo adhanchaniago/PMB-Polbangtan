@@ -3,7 +3,6 @@
 namespace App\Libs\Traits;
 
 use App\Institusi;
-use App\Jurusan;
 
 trait InfoOperator
 {
@@ -18,10 +17,5 @@ trait InfoOperator
         $institusi = Institusi::findOrFail($operator->institusi_id);
 
         return $institusi;
-    }
-
-    protected function getJurusan($institusiId)
-    {
-        return Jurusan::where('institusi_id', $institusiId)->get();
     }
 }
