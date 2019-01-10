@@ -6,10 +6,16 @@ use App\Jurusan;
 use App\Libs\Services\PendaftaranDetailService;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Services\PrestasiService;
+use App\Libs\Traits\InfoPendaftaran;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Redirect;
 
 class VerifikasiDokumenController extends Controller
 {
+    use InfoPendaftaran;
+
     private $url = 'verifikasi-dokumen';
     /**
      * Display a listing of the resource.
@@ -39,9 +45,17 @@ class VerifikasiDokumenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, PendaftaranService $service)
     {
-        //
+        DB::transaction(function () use ($request, $service) {
+            $this->updateState($request->pendaftaran_id, $request->state);
+
+            $data = $request->only(['keterangan_verifikasi']);
+            $data['tanggal_verifikasi'] = Carbon::now();
+            $service->updatePendaftaran($request->pendaftaran_id, $data);
+        });
+
+        return Redirect::to($this->url)->withSuccess('Verifikasi pendaftaran berhasil');
     }
 
     /**

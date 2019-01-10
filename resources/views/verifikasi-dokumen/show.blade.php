@@ -12,13 +12,41 @@
             <div class="clearfix"></div>
 
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
-                    <form action="{{ route('pendaftaran.store') }}" method="post">
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-app">
-                            <i class="fa fa-save"></i> Submit Pendaftaran
-                        </button>
-                    </form>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Informasi Pendaftaran</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <form id="verifikasi_dokumen" action="{{ route('verifikasi-dokumen.store') }}" method="post" class="form-horizontal form-label-left">
+                                {{ csrf_field() }}
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Hasil Verifikasi</label>
+                                    <div class="col-sm-9">
+                                        <select id="hasil" name="state" class="form-control">
+                                            <option value="memverifikasi_dokumen">Terima</option>
+                                            <option value="menolak_dokumen">Gugur</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Keterangan</label>
+                                    <div class="col-sm-9">
+                                        <textarea id="keterangan_verifikasi" name="keterangan_verifikasi" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
+                                        <input type="hidden" name="pendaftaran_id" value="{{ $pendaftaran->id  }}">
+                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
