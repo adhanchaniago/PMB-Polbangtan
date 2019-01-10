@@ -116,9 +116,6 @@ return [
             'name' => 'operator',
             'label' => 'Pperator',
             'permissions'=> [
-            	'master_data',
-                'siswa_read',
-                'jadwal_read',
                 'pendaftaran',
                 'tes_tulis'
             ],

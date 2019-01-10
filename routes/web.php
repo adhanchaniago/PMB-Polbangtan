@@ -67,6 +67,13 @@ Route::group(['middleware' => 'auth'], function ()
     Route::group(['middleware' => 'roles', 'roles' => 'admin_pusat'], function ()
     {
         Route::resource('verifikasi-dokumen', 'VerifikasiDokumenController');
+        Route::resource('tes-wawancara', 'WawancaraController');
+        Route::resource('tes-kesehatan', 'TesKesehatanController');
+    });
+
+    Route::group(['middleware' => 'roles', 'roles' => 'operator'], function ()
+    {
+        Route::resource('tes-tulis', 'TesTulisController');
     });
 
     Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
@@ -75,6 +82,15 @@ Route::group(['middleware' => 'auth'], function ()
         });
         Route::group(['prefix' => '/verifikasi-dokumen'], function () {
             Route::get('/', 'VerifikasiDokumenController@index')->name('api.verifikasi');
+        });
+        Route::group(['prefix' => '/tes-tulis'], function () {
+            Route::get('/', 'TesTulisController@index')->name('api.tulis');
+        });
+        Route::group(['prefix' => '/tes-wawancara'], function () {
+            Route::get('/', 'WawancaraController@index')->name('api.wawancara');
+        });
+        Route::group(['prefix' => '/tes-kesehatan'], function () {
+            Route::get('/', 'TesKesehatanController@index')->name('api.kesehatan');
         });
     });
 });

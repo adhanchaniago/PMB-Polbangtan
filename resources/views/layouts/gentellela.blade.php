@@ -91,13 +91,13 @@
 										<li><a href="{{ route('verifikasi-dokumen.index') }}">Verifikasi Dokumen</a></li>
 										@endcan
 										@can('tes_tulis')
-										<li><a href="#">Tes Tulis</a></li>
+										<li><a href="{{ route('tes-tulis.index') }}">Tes Tulis</a></li>
 										@endcan
 										@can('tes_wawancara')
-										<li><a href="#">Tes Wawancara</a></li>
+										<li><a href="{{ route('tes-wawancara.index') }}">Tes Wawancara</a></li>
 										@endcan
 										@can('tes_kesehatan')
-										<li><a href="#">Tes Kesehatan</a></li>
+										<li><a href="{{ route('tes-kesehatan.index') }}">Tes Kesehatan</a></li>
 										@endcan
 										@can('verifikasi_akhir')
 										<li><a href="#">Verifikasi Akhir</a></li>

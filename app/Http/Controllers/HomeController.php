@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Libs\Services\UserService;
+use App\Libs\Traits\InfoOperator;
 use App\Libs\Traits\InfoSiswa;
 use Illuminate\Http\Request;
 use Redirect;
 
 class HomeController extends Controller
 {
-	use InfoSiswa;
+	use InfoSiswa, InfoOperator;
 
     /**
      * Create a new controller instance.
@@ -32,6 +33,8 @@ class HomeController extends Controller
     	$kelengkapan = true;
     	$state = '';
     	$pendaftaran = '';
+    	$institusi = '';
+        $jurusan = '';
 
     	if ( $request->user()->person_type == 'siswa' ) {
     		$kelengkapan = $this->cekKelengkapanDokumen();
@@ -39,11 +42,18 @@ class HomeController extends Controller
             $pendaftaran = $this->getPendaftaran();
     	}
 
+        if ( $request->user()->person_type == 'operator' ) {
+            $institusi = $this->getInstitusi();
+            $jurusan = $this->getJurusan($institusi->id);
+        }
+
         return view('home', [
         	'data' => $data,
         	'kelengkapan' => $kelengkapan,
         	'state' => $state,
-            'pendaftaran' => $pendaftaran
+            'pendaftaran' => $pendaftaran,
+            'institusi' => $institusi,
+            'jurusan' => $jurusan
         ]);
     }
 

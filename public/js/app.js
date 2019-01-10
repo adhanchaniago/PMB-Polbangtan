@@ -44833,7 +44833,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     props: {
-        urlDataList: String
+        urlDataList: String,
+        title: String
     },
 
     data: function data() {
@@ -44924,7 +44925,11 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-md-12 col-sm-12 col-xs-12" }, [
       _c("div", { staticClass: "x_panel" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "x_title" }, [
+          _c("h2", [_vm._v(_vm._s(_vm.title))]),
+          _vm._v(" "),
+          _c("div", { staticClass: "clearfix" })
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "x_content" }, [
           _c("div", { staticClass: "row" }, [
@@ -44974,7 +44979,7 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _vm._m(0)
                       ])
                     ])
                   ])
@@ -44995,7 +45000,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "table-responsive" }, [
                 _c("table", { staticClass: "table table-striped" }, [
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -45065,16 +45070,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "x_title" }, [
-      _c("h2", [_vm._v("Daftar Pendaftaran")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "clearfix" })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -17,6 +17,7 @@ class VerifikasiDokumenController extends Controller
     use InfoPendaftaran;
 
     private $url = 'verifikasi-dokumen';
+
     /**
      * Display a listing of the resource.
      *

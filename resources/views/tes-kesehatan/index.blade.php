@@ -13,8 +13,8 @@
 
             <div id="app" class="container">
                 <pendaftaran-list
-                    url-data-list="{{ $urlDataList }}"
-                    title="Daftar Pendaftaran"></pendaftaran-list>
+                        url-data-list="{{ $urlDataList }}"
+                        title="Daftar Peserta Tes Kesehatan"></pendaftaran-list>
             </div>
         </div>
     </div>
