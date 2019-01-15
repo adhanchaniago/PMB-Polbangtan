@@ -17,6 +17,7 @@ class TesTulisController extends Controller
 
         return response()->json($service->paginatePendaftaran([
             'institusi' => $institusi->id,
+            'no_pendaftaran' => $request->q,
             'state' => 'tes_tulis'
         ]));
     }

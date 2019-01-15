@@ -6,7 +6,7 @@
             <th>Siswa</th>
             <th>Nilai Matematika</th>
             <th>Nilai Teknis Pertanian</th>
-            <th>Hasil (L/G)</th>
+            <th>Lulus (Y/T)</th>
         </tr>
     </thead>
     <tbody>
