@@ -34,7 +34,8 @@
     <div id="modal_upload" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
-            <form action="{{ route('tes-tulis.store') }}" id="form_upload" method="post" class="modal-content">
+            <form action="{{ route('tes-tulis.store') }}" id="form_upload" method="post"
+                  class="modal-content" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="modal-header bg-primary-600">

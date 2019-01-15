@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TesTulisExport;
+use App\Imports\TesTulisImport;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Traits\InfoOperator;
 use App\Libs\Traits\InstitusiJurusan;
@@ -46,7 +47,11 @@ class TesTulisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $institusi = $this->getInstitusi();
+
+        if ($request->hasFile('hasil_ujian')) {
+            Excel::import(new TesTulisImport($institusi->id, $request->user()->id), $request->hasil_ujian);
+        }
     }
 
     /**

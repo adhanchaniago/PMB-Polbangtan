@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function ()
         Route::resource('tes-tulis', 'TesTulisController');
         Route::get('tes-tulis/download/pdf', 'TesTulisController@pdf')->name('tes-tulis.pdf');
         Route::get('tes-tulis/download/xls', 'TesTulisController@xls')->name('tes-tulis.xls');
+        Route::post('tes-tulis/preview', 'TesTulisController@preview')->name('tes-tulis.preview');
     });
 
     Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
