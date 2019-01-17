@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\WawancaraExport;
+use App\Libs\Services\PendaftaranService;
+use App\Libs\Traits\InstitusiJurusan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class WawancaraController extends Controller
 {
+    use InstitusiJurusan;
+
     private $url = 'tes-wawancara';
 
     /**
@@ -84,5 +91,33 @@ class WawancaraController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pdf(PendaftaranService $service)
+    {
+        $pendaftaran = $service->searchPendaftaran([
+            'state' => 'tes_wawancara'
+        ]);
+        $pendaftaran = $pendaftaran->map(function($item) {
+            $item['jurusan_1_label'] = $this->getJurusanName($item->jurusan_1);
+            $item['jurusan_2_label'] = $this->getJurusanName($item->jurusan_2);
+
+            return $item;
+        });
+
+        $pdf = PDF::loadView($this->url . '.pdf', [
+            'pendaftaran' => $pendaftaran
+        ]);
+
+        return $pdf->stream();
+    }
+
+    public function xls(PendaftaranService $service)
+    {
+        $pendaftaran = $service->searchPendaftaran([
+            'state' => 'tes_wawancara'
+        ]);
+
+        return Excel::download(new WawancaraExport($pendaftaran), 'daftar_peserta_wawancara.xlsx');
     }
 }

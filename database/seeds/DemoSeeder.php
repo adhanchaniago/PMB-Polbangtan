@@ -95,13 +95,19 @@ class DemoSeeder extends Seeder
                 $serial = new SerialNumberService(new SerialNumber());
                 $no_pendaftaran = $serial->getSerialNumber(5);
 
+                $jurusan_1 = Jurusan::where('institusi_id', 5)->get()->random()->id;
+                $jurusan_2 = $jurusan_1;
+
+                while ($jurusan_2 == $jurusan_1) {
+                    $jurusan_2 = Jurusan::where('institusi_id', 5)->get()->random()->id;
+                }
                 Pendaftaran::create([
                     'no_pendaftaran' => $no_pendaftaran,
                     'siswa_id' => $siswa->getKey(),
                     'jalur' => $value,
                     'institusi' => 5,
-                    'jurusan_1' => 21,
-                    'jurusan_2' => 22,
+                    'jurusan_1' => $jurusan_1,
+                    'jurusan_2' => $jurusan_2,
                     'state' => 'verifikasi_dokumen'
                 ]);
             }

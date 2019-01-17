@@ -11,6 +11,17 @@
 
             <div class="clearfix"></div>
 
+            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right">
+                <a class="btn btn-primary" href="{{ route('tes-wawancara.pdf') }}" target="_blank">
+                    <i class="fa fa-download"></i> Download Daftar Peserta Wawancara
+                </a>
+                <a class="btn btn-success"
+                   data-toggle="modal"
+                   data-target="#modal_upload">
+                    <i class="fa fa-upload"></i> Upload Hasil Wawancara
+                </a>
+            </div>
+
             <div id="app" class="container">
                 <pendaftaran-list
                     url-data-list="{{ $urlDataList }}"
@@ -18,6 +29,56 @@
             </div>
         </div>
     </div>
+
+    <div id="modal_upload" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <form action="{{ route('tes-wawancara.store') }}" id="form_upload" method="post"
+                  class="modal-content" enctype="multipart/form-data">
+                {{ csrf_field() }}
+
+                <div class="modal-header bg-primary-600">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Upload Hasil Wawancara</h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="content">
+                        <p>
+                            <strong>Catatan:</strong> Pada halaman ini Admin Pusat dapat mengupload
+                            hasil wawancara peserta dengan menggunakan file excel yang telah
+                            disediakan (Daftar Peserta). Pada file ini terdapat beberapa kolom
+                            yaitu: No, Nomor Pendaftaran, Siswa, Hasil Wawancara, Lulus (Y/T)
+                        </p>
+                        <p>
+                            <img src="{{ asset('images/upload_tes_wawancara.png') }}" width="100%">
+                        </p>
+                        <p><strong>Keterangan:</strong></p>
+                        <ul>
+                            <li>Kolom A adalah nomor baris (<i>Terisi automatis</i>)</li>
+                            <li>Kolom B adalah nomor pendaftaran (<i>Terisi automatis</i>)</li>
+                            <li>Kolom C adalah nama siswa yang mengikut wawancara (<i>Terisi automatis</i>)</li>
+                            <li>Kolom D-M adalah hasil penilaian wawancara, diisi menggunakan huruf B/C/K (B: Baik, C: Cukup, K: Kurang)</li>
+                            <li>Kolom N adalah keterangan, diisi menggunakan isian bebas</li>
+                            <li>Kolom O adalah hasil akhir untuk menetukan apakah siswa dinyatakan lulus atau tidak, diisi menggunakan huruf Y atau T</li>
+                        </ul>
+                        <div style="text-align: center;">
+                            <a class="btn btn-primary" href="{{ route('tes-wawancara.xls') }}"><i class="fa fa-file-excel-o"></i>  Download Daftar Peserta</a>
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Hasil Wawancara</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="hasil_wawancara_add" required class="form-control" name="hasil_wawancara" accept=".xlsx">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><b><i class="fa fa-close"></i></b> Batal</button>
+                    <button type="submit" class="btn btn-success"><b><i class="fa fa-save"></i></b> Simpan</button>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
 

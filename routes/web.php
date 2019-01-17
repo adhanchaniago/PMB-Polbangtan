@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth'], function ()
     {
         Route::resource('verifikasi-dokumen', 'VerifikasiDokumenController');
         Route::resource('tes-wawancara', 'WawancaraController');
+        Route::get('tes-wawancara/download/pdf', 'WawancaraController@pdf')->name('tes-wawancara.pdf');
+        Route::get('tes-wawancara/download/xls', 'WawancaraController@xls')->name('tes-wawancara.xls');
         Route::resource('tes-kesehatan', 'TesKesehatanController');
     });
 
@@ -80,7 +82,6 @@ Route::group(['middleware' => 'auth'], function ()
         Route::resource('tes-tulis', 'TesTulisController');
         Route::get('tes-tulis/download/pdf', 'TesTulisController@pdf')->name('tes-tulis.pdf');
         Route::get('tes-tulis/download/xls', 'TesTulisController@xls')->name('tes-tulis.xls');
-        Route::post('tes-tulis/preview', 'TesTulisController@preview')->name('tes-tulis.preview');
     });
 
     Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {

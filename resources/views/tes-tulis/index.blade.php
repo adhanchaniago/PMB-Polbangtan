@@ -54,12 +54,12 @@
                         </p>
                         <p><strong>Keterangan:</strong></p>
                         <ul>
-                            <li>No: Kolom nomor baris (<i>Terisi automatis</i>)</li>
-                            <li>Nomor Pendaftaran: Kolom nomor pendaftaran (<i>Terisi automatis</i>)</li>
-                            <li>Siswa: Kolom nama siswa yang mengikut ujian (<i>Terisi automatis</i>)</li>
-                            <li>Nilai Matematika: Kolom nilai matematika, diisi menggunakan angka (contoh: 80)</li>
-                            <li>Nilai Teknis Pertanian: Kolom nilai teknis pertanian, diisi menggunakan angka (contoh: 80)</li>
-                            <li>Lulus: Kolom hasil akhir untuk menetukana apakah siswa dinyatakan lulus atau tidak, diisi menggunakan huruf Y atau T</li>
+                            <li>Kolom A adalah nomor baris (<i>Terisi automatis</i>)</li>
+                            <li>Kolom B adalah nomor pendaftaran (<i>Terisi automatis</i>)</li>
+                            <li>Kolom C adalah nama siswa yang mengikut ujian (<i>Terisi automatis</i>)</li>
+                            <li>Kolom D adalah nilai matematika, diisi menggunakan angka (contoh: 80)</li>
+                            <li>Kolom E adalah nilai teknis pertanian, diisi menggunakan angka (contoh: 80)</li>
+                            <li>Kolom F adalah hasil akhir untuk menetukan apakah siswa dinyatakan lulus atau tidak, diisi menggunakan huruf Y atau T</li>
                         </ul>
                         <div style="text-align: center;">
                             <a class="btn btn-primary" href="{{ route('tes-tulis.xls') }}"><i class="fa fa-file-excel-o"></i>  Download Daftar Peserta</a>

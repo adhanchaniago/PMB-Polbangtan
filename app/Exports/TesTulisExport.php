@@ -15,6 +15,7 @@ class TesTulisExport implements FromView, ShouldAutoSize
     {
         $this->pendaftaran = $pendaftaran;
     }
+
     /**
      * @return View
      */
