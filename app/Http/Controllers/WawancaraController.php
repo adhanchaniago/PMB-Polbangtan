@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\WawancaraExport;
+use App\Imports\WawancaraImport;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Traits\InstitusiJurusan;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use Redirect;
 
 class WawancaraController extends Controller
 {
@@ -45,7 +47,12 @@ class WawancaraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('hasil_wawancara')) {
+            $excel = new WawancaraImport($request->user()->id);
+            $excel->import($request->hasil_wawancara);
+        }
+
+        return Redirect::to('tes-wawancara')->withSuccess('Import data hasil wawancara berhasil');
     }
 
     /**

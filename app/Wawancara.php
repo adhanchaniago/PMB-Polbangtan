@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TesTulis extends Model
+class Wawancara extends Model
 {
     protected $guarded = [];
 
