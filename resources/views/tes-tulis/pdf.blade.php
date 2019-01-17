@@ -25,17 +25,17 @@
                 <td>Jurusan 1</td>
                 <td>Jurusan 2</td>
             </tr>
-            <tr>
             @php $no = 1; @endphp
             @foreach($pendaftaran as $key => $value)
+            <tr>
                 <td>{{ $no }}</td>
                 <td>{{ $value->no_pendaftaran }}</td>
                 <td>{{ $value->siswa->nama }}</td>
                 <td>{{ $value->jurusan_1_label  }}</td>
                 <td>{{ $value->jurusan_2_label  }}</td>
                 @php $no++; @endphp
-            @endforeach
             </tr>
+            @endforeach
         </table>
     </body>
 </html>

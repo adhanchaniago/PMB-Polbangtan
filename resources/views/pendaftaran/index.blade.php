@@ -38,7 +38,7 @@
 					</div>
 					@endif
 
-					@include('pendaftaran.show')
+					@include('pendaftaran.info')
 				@endif
 			@else
 				@include('pendaftaran.tolak')

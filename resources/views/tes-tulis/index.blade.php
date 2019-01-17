@@ -25,8 +25,7 @@
             <div id="app" class="container">
                 <pendaftaran-list
                     url-data-list="{{ $urlDataList }}"
-                    title="Daftar Peserta Tes Tulis"
-                    show-detail="no"></pendaftaran-list>
+                    title="Daftar Peserta Tes Tulis"></pendaftaran-list>
             </div>
         </div>
     </div>

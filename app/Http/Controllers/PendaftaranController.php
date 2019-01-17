@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Institusi;
+use App\Jurusan;
 use App\Libs\Services\PendaftaranDetailService;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Services\PrestasiService;
@@ -92,9 +93,38 @@ class PendaftaranController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,
+                         PendaftaranService $service,
+                         PendaftaranDetailService $dService,
+                         PrestasiService $pService)
     {
-        //
+        $pendaftaran = $service->getPendaftaranById($id);
+        $pendaftaran['jalur_label'] = ucwords(str_replace("-", " ", $pendaftaran->jalur));
+        $pendaftaran['jurusan_1_label'] = Jurusan::selectName($pendaftaran->jurusan_1);
+        $pendaftaran['jurusan_2_label'] = Jurusan::selectName($pendaftaran->jurusan_2);
+
+        $detail = $dService->getPendaftaranDetailByPendaftaran($pendaftaran->id);
+        $biodata = $detail->map(function($item) {
+            return $item;
+        })->where('kelompok', 'biodata');
+
+        $dokumen = $detail->map(function($item) {
+            return $item;
+        })->where('kelompok', 'berkas');
+
+        $cek_sistem_false = $detail->map(function($item) {
+            return $item;
+        })->where('cek_sistem', false)->count();
+
+        $prestasi = $pService->getPrestasiByPendaftaran($pendaftaran->id);
+
+        return view('pendaftaran.show', [
+            'pendaftaran' => $pendaftaran,
+            'biodata' => $biodata,
+            'dokumen' => $dokumen,
+            'cek_sistem_false' => $cek_sistem_false,
+            'prestasi' => $prestasi
+        ]);
     }
 
     /**

@@ -38,7 +38,9 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Lupa Password?
                                 </a>
-                                Belum mendapatkan link aktivasi?
+                            </div>
+                            <div class="text-center">
+                                <i>Belum mendapatkan link aktifasi?</i>
                                 <a class="btn btn-link" href="{{ route('aktifasi.resend') }}">
                                     Kirim ulang email aktifasi
                                 </a>

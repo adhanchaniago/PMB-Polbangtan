@@ -55,11 +55,36 @@ class DemoSeeder extends Seeder
 
         foreach ($jalur as $value) {
             for ($i=0; $i<100; $i++) {
-                $siswa = Siswa::create(['nama' => $faker->name]);
+                $siswa = Siswa::create([
+                    'nisn' => 'demo',
+                    'nama' => $faker->name,
+                    'alamat' => 'demo',
+                    'kelurahan' => 'demo',
+                    'kecamatan' => 'demo',
+                    'kota' => 'demo',
+                    'provinsi' => 'demo',
+                    'kode_pos' => 'demo',
+                    'tempat_lahir' => 'demo',
+                    'tanggal_lahir' => 'demo',
+                    'jenis_kelamin' => 'demo',
+                    'ktp' => 'demo',
+                    'tipe_sekolah' => '2',
+                    'nama_sekolah' => 'demo',
+                    'alamat_sekolah' => 'demo',
+                    'no_telepon_sekolah' => 'demo',
+                    'jurusan' => '21',
+                    'tahun_lulus' => '2018',
+                    'no_ijazah' => 'demo',
+                    'ijazah' => 'demo',
+                    'tinggi_badan' => '180',
+                    'sk_sehat' => 'demo',
+                    'sk_tidak_hamil' => 'demo',
+                    'foto' => 'demo'
+                ]);
 
                 $user = User::create([
                     'name' => $siswa->nama,
-                    'email' => $faker->safeEmail,
+                    'email' => $faker->unique()->safeEmail,
                     'password' => bcrypt(123456),
                     'person_id' => $siswa->getKey(),
                     'person_type' => 'siswa',

@@ -52,9 +52,13 @@ Route::group(['middleware' => 'auth'], function ()
         Route::resource('siswa', 'SiswaController');
     });
 
+    Route::group(['middleware' => 'roles', 'roles' => ['siswa', 'admin_pusat', 'operator']], function ()
+    {
+        Route::resource('pendaftaran', 'PendaftaranController');
+    });
+
     Route::group(['middleware' => 'roles', 'roles' => 'siswa'], function ()
     {
-		Route::resource('pendaftaran', 'PendaftaranController');
 		Route::get('pemilihan-jalur', 'PendaftaranController@jalur')->name('pilih-jalur');
 		Route::post('jalur/simpan-jalur', 'PendaftaranController@store_jalur')->name('store-jalur');
 		Route::get('jurusan/pemilihan-jurusan', 'PendaftaranController@jurusan')->name('pilih-jurusan');
