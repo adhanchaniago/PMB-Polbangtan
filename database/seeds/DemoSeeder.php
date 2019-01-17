@@ -1,5 +1,10 @@
 <?php
 
+use App\Jurusan;
+use App\Libs\Services\SerialNumberService;
+use App\Pendaftaran;
+use App\SerialNumber;
+use App\Siswa;
 use Illuminate\Database\Seeder;
 
 use App\Pegawai;
@@ -14,6 +19,8 @@ class DemoSeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create('id_ID');
+
     	$pegawai = Pegawai::create([
     		'institusi_id' => 0,
     		'nama' => 'Admin Pusat'
@@ -42,6 +49,37 @@ class DemoSeeder extends Seeder
 	        	'person_type' => 'operator'
 	        ]);
 	        $user->assignRole(config('rolepermission.roles.operator.name'));
+        }
+
+        $jalur = ['tugas-belajar', 'undangan-smk', 'undangan-petani', 'kerjasama-pemda', 'umum'];
+
+        foreach ($jalur as $value) {
+            for ($i=0; $i<100; $i++) {
+                $siswa = Siswa::create(['nama' => $faker->name]);
+
+                $user = User::create([
+                    'name' => $siswa->nama,
+                    'email' => $faker->safeEmail,
+                    'password' => bcrypt(123456),
+                    'person_id' => $siswa->getKey(),
+                    'person_type' => 'siswa',
+                    'status' => 1
+                ]);
+                $user->assignRole(config('rolepermission.roles.siswa.name'));
+
+                $serial = new SerialNumberService(new SerialNumber());
+                $no_pendaftaran = $serial->getSerialNumber(5);
+
+                Pendaftaran::create([
+                    'no_pendaftaran' => $no_pendaftaran,
+                    'siswa_id' => $siswa->getKey(),
+                    'jalur' => $value,
+                    'institusi' => 5,
+                    'jurusan_1' => 21,
+                    'jurusan_2' => 22,
+                    'state' => 'verifikasi_dokumen'
+                ]);
+            }
         }
     }
 }

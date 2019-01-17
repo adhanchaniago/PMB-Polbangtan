@@ -10,6 +10,7 @@ use App\Libs\Traits\InstitusiJurusan;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use Redirect;
 
 class TesTulisController extends Controller
 {
@@ -50,8 +51,11 @@ class TesTulisController extends Controller
         $institusi = $this->getInstitusi();
 
         if ($request->hasFile('hasil_ujian')) {
-            Excel::import(new TesTulisImport($institusi->id, $request->user()->id), $request->hasil_ujian);
+            $excel = new TesTulisImport($institusi->id, $request->user()->id);
+            $excel->import($request->hasil_ujian);
         }
+
+        return Redirect::to('tes-tulis')->withSuccess('Import data hasil ujian berhasil');
     }
 
     /**
