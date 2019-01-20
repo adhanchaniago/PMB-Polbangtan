@@ -47,7 +47,9 @@
 												data-toggle="modal"
 												data-target="#modal_update"
 												data-url="{{ route('pegawai.update', $value->id) }}"
-												data-nama="{{ $value->nama }}">
+												data-nama="{{ $value->nama }}"
+												data-institusi="{{ $value->institusi_id }}"
+												data-email="{{ $value->user->email }}">
 													<i class="fa fa-edit"></i>
 												</a>
 	  										</td>
@@ -149,7 +151,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-3">Institusi*</label>
 						<div class="col-sm-9">
-							<select id="institusi_add" class="form-control" name="institusi">
+							<select id="institusi_update" class="form-control" name="institusi">
 								@foreach($institusi as $key => $value)
 									<option value="{{ $value->id }}">{{ $value->nama }}</option>
 								@endforeach
@@ -161,7 +163,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-3">Email*</label>
 						<div class="col-sm-9">
-							<input type="email" id="email_add" required class="form-control" name="email">
+							<input type="email" id="email_update" required class="form-control" name="email">
 						</div>
 					</div>
 				</div>
@@ -169,15 +171,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-3">Password*</label>
 						<div class="col-sm-9">
-							<input type="password" id="password_add" required class="form-control" name="password">
-						</div>
-					</div>
-				</div>
-				<div class="modal-body form-horizontal">
-					<div class="form-group">
-						<label class="control-label col-sm-3">Konfirmasi Password*</label>
-						<div class="col-sm-9">
-							<input type="password" id="password_confirmation_add" required class="form-control" name="password_confirmation">
+							<input type="password" id="password_update" class="form-control" name="password">
 						</div>
 					</div>
 				</div>
@@ -252,6 +246,8 @@
 	$('#modal_update').on('show.bs.modal', function(e){
 		$("#form_update").prop('action', $(e.relatedTarget).data('url'));
 		$("#nama_update").val($(e.relatedTarget).data('nama'));
+		$("#institusi_update").val($(e.relatedTarget).data('institusi'));
+		$("#email_update").val($(e.relatedTarget).data('email'));
 	});
 
 </script>

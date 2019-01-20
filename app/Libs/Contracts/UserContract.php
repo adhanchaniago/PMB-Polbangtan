@@ -13,4 +13,6 @@ interface UserContract
     public function searchUser(array $filter);
 
     public function updateUser(int $id, array $data);
+
+    public function updateUserPegawai(int $personId, array $data);
 }

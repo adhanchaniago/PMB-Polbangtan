@@ -26,6 +26,6 @@ class PegawaiService implements PegawaiContract
 
     public function updatePegawai(int $id, array $data)
     {
-
+    	return $this->model->findOrFail($id)->update($data);
     }
 }

@@ -54,4 +54,10 @@ class UserService implements UserContract
     {
     	return $this->model->updateUser($id, $data);
     }
+
+    public function updateUserPegawai(int $personId, array $data) : User
+    {
+    	return $this->model->updateUserPegawai($personId, $data);
+    }
+
 }
