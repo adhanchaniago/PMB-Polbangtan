@@ -87,7 +87,11 @@
 				<div class="form-group">
 					<label class="control-label col-sm-3">Institusi*</label>
 					<div class="col-sm-9">
-						<input type="text" id="nama_add" required class="form-control" name="nama" value="{{ old('name') }}">
+						<select id="institusi_add" class="form-control" name="institusi">
+							@foreach($institusi as $key => $value)
+								<option value="{{ $value->id }}">{{ $value->nama }}</option>
+							@endforeach
+						</select>
 					</div>
 				</div>
 			</div>
@@ -95,7 +99,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-3">Email*</label>
 					<div class="col-sm-9">
-						<input type="text" id="nama_add" required class="form-control" name="nama" value="{{ old('name') }}">
+						<input type="email" id="email_add" required class="form-control" name="email" value="{{ old('email') }}">
 					</div>
 				</div>
 			</div>
@@ -103,7 +107,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-3">Password*</label>
 					<div class="col-sm-9">
-						<input type="text" id="nama_add" required class="form-control" name="nama" value="{{ old('name') }}">
+						<input type="password" id="password_add" required class="form-control" name="password">
 					</div>
 				</div>
 			</div>
@@ -111,7 +115,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-3">Konfirmasi Password*</label>
 					<div class="col-sm-9">
-						<input type="text" id="nama_add" required class="form-control" name="nama" value="{{ old('name') }}">
+						<input type="password" id="password_confirmation_add" required class="form-control" name="password_confirmation">
 					</div>
 				</div>
 			</div>
@@ -132,22 +136,49 @@
 
 			<div class="modal-header bg-primary-600">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Ruang Lingkup SNI</h4>
+				<h4 class="modal-title">Perubahan Data User</h4>
 			</div>
 			<div class="modal-body form-horizontal">
 				<div class="form-group">
-					<label class="control-label col-sm-3">Nama</label>
+					<label class="control-label col-sm-3">Nama*</label>
 					<div class="col-sm-9">
 						<input type="text" id="nama_update" required class="form-control" name="nama">
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-3">Status</label>
-					<div class="col-sm-9">
-						<select id="status_update" class="form-control" name="status">
-            				<option value="99">Tidak Aktif</option>
-            				<option value="1" selected>Aktif</option>
-            			</select>
+				<div class="modal-body form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-3">Institusi*</label>
+						<div class="col-sm-9">
+							<select id="institusi_add" class="form-control" name="institusi">
+								@foreach($institusi as $key => $value)
+									<option value="{{ $value->id }}">{{ $value->nama }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-3">Email*</label>
+						<div class="col-sm-9">
+							<input type="email" id="email_add" required class="form-control" name="email">
+						</div>
+					</div>
+				</div>
+				<div class="modal-body form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-3">Password*</label>
+						<div class="col-sm-9">
+							<input type="password" id="password_add" required class="form-control" name="password">
+						</div>
+					</div>
+				</div>
+				<div class="modal-body form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-3">Konfirmasi Password*</label>
+						<div class="col-sm-9">
+							<input type="password" id="password_confirmation_add" required class="form-control" name="password_confirmation">
+						</div>
 					</div>
 				</div>
 			</div>

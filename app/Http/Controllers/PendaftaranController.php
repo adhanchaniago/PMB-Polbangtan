@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Institusi;
 use App\Jurusan;
+use App\Libs\Services\InstitusiService;
 use App\Libs\Services\PendaftaranDetailService;
 use App\Libs\Services\PendaftaranService;
 use App\Libs\Services\PrestasiService;
@@ -273,14 +273,14 @@ class PendaftaranController extends Controller
         return redirect()->route('pilih-jurusan');
     }
 
-    public function jurusan()
+    public function jurusan(InstitusiService $service)
     {
         $pendaftaran = $this->getPendaftaran();
         if ($pendaftaran->state != 'pemilihan_jurusan') {
             return Redirect::to('pendaftaran')->withError('Anda tidak dapat memilih jurusan');
         }
 
-        $institusi = Institusi::where('id', '>', '1')->get();
+        $institusi = $service->getOnlyCabang();
         $jurusan = $this->getJurusan($institusi[0]->id);
 
         return view('pendaftaran.jurusan', [

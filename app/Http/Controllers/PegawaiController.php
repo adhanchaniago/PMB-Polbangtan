@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libs\Services\InstitusiService;
 use App\Libs\Services\PegawaiService;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,15 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PegawaiService $service)
+    public function index(PegawaiService $service, InstitusiService $iService)
     {
     	$data = $service->getPegawai();
-        return view('pegawai.index', ['data' => $data]);
+    	$institusi = $iService->getAllInstitusi();
+
+        return view('pegawai.index', [
+        	'data' => $data,
+        	'institusi' => $institusi
+        ]);
     }
 
     /**

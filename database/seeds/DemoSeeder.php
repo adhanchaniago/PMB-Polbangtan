@@ -40,7 +40,7 @@ class DemoSeeder extends Seeder
         foreach($institusi as $key => $value) {
 	    	$pegawai = Pegawai::create([
 	    		'institusi_id' => $value->id,
-	    		'nama' => 'Operator'
+	    		'nama' => $faker->name
 	    	]);
 	        $user = User::create([
 	        	'name' => $pegawai->nama,
