@@ -31,6 +31,21 @@ class Pendaftaran extends Model
         return $this->hasOne('App\Siswa', 'id', 'siswa_id');
     }
 
+    public function tesTulis()
+    {
+        return $this->hasOne('App\TesTulis', 'no_pendaftaran', 'no_pendaftaran');
+    }
+
+    public function tesWawancara()
+    {
+        return $this->hasOne('App\Wawancara', 'no_pendaftaran', 'no_pendaftaran');
+    }
+
+    public function tesKesehatan()
+    {
+        return $this->hasOne('App\TesKesehatan', 'no_pendaftaran', 'no_pendaftaran');
+    }
+
     public static function createPendaftaran(array $data)
     {
 	    return Pendaftaran::create($data);

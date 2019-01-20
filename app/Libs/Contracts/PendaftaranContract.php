@@ -2,8 +2,6 @@
 
 namespace App\Libs\Contracts;
 
-use Illuminate\Http\Request;
-
 interface PendaftaranContract
 {
     public function createPendaftaran(array $data);
@@ -11,6 +9,8 @@ interface PendaftaranContract
     public function getPendaftaranBySiswa(int $siswaId);
 
     public function getPendaftaranById(int $id);
+
+    public function getPendaftaranGroupByInstitusi(array $filter);
 
     public function paginatePendaftaran(array $filter);
 

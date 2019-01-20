@@ -64,6 +64,10 @@ class JurusanSeeder extends Seeder
 			'Teknologi Produksi Tanaman Perkebunan'
 		];
 
+		Institusi::create([
+			'nama' => 'Pusat'
+		]);
+		
     	foreach ($this->institusi as $value) {
 	    	$institusi = Institusi::create([
 	    		'nama' => $value

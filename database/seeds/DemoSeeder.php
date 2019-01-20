@@ -1,14 +1,14 @@
 <?php
 
+use App\Institusi;
 use App\Jurusan;
-use App\Libs\Services\SerialNumberService;
+use App\Pegawai;
 use App\Pendaftaran;
 use App\SerialNumber;
 use App\Siswa;
-use Illuminate\Database\Seeder;
-
-use App\Pegawai;
 use App\User;
+use App\Libs\Services\SerialNumberService;
+use Illuminate\Database\Seeder;
 
 class DemoSeeder extends Seeder
 {
@@ -22,7 +22,7 @@ class DemoSeeder extends Seeder
         $faker = \Faker\Factory::create('id_ID');
 
     	$pegawai = Pegawai::create([
-    		'institusi_id' => 0,
+    		'institusi_id' => 1,
     		'nama' => 'Admin Pusat'
     	]);
         $user = User::create([
@@ -35,9 +35,11 @@ class DemoSeeder extends Seeder
         ]);
         $user->assignRole(config('rolepermission.roles.admin_pusat.name'));
 
-        for ( $i=1; $i<=7; $i++ ) {
+        $i=1;
+        $institusi = Institusi::where('id', '>', 1)->get();
+        foreach($institusi as $key => $value) {
 	    	$pegawai = Pegawai::create([
-	    		'institusi_id' => $i,
+	    		'institusi_id' => $value->id,
 	    		'nama' => 'Operator'
 	    	]);
 	        $user = User::create([
@@ -49,6 +51,7 @@ class DemoSeeder extends Seeder
 	        	'person_type' => 'operator'
 	        ]);
 	        $user->assignRole(config('rolepermission.roles.operator.name'));
+	        $i++;
         }
 
         $jalur = ['tugas-belajar', 'undangan-smk', 'undangan-petani', 'kerjasama-pemda', 'umum'];

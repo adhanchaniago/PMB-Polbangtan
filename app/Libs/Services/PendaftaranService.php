@@ -2,6 +2,7 @@
 
 namespace App\Libs\Services;
 
+use App\Institusi;
 use App\Pendaftaran;
 use App\Libs\Contracts\PendaftaranContract;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,6 +30,26 @@ class PendaftaranService implements PendaftaranContract
     public function getPendaftaranBySiswa(int $siswaId) : ?Collection
     {
     	return $this->model->querySearch(['siswa_id' => $siswaId]);
+    }
+
+    public function getPendaftaranGroupByInstitusi(array $filter)
+    {
+        $pendaftaran = $this->model->querySearch($filter);
+
+        $groupPendaftaran = $pendaftaran->map(function($item) {
+            return $item;
+        })->groupBy('institusi')->map(function ($item) {
+            return $item->count();
+        });
+
+        $institusi = Institusi::all();
+
+        $data = $institusi->map(function($item) use($groupPendaftaran) {
+            $item->jumlah = $groupPendaftaran->get($item->id) ?? 0;
+            return $item;
+        });
+
+        return $data;
     }
 
     public function paginatePendaftaran(array $filter)

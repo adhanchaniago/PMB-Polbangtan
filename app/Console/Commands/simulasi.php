@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Pendaftaran;
+use App\TesKesehatan;
 use App\TesTulis;
 use App\Wawancara;
 use Illuminate\Console\Command;
@@ -69,6 +70,7 @@ class simulasi extends Command
         Pendaftaran::where('state', '!=', '')->update(['state' => 'verifikasi_dokumen']);
         TesTulis::truncate();
         Wawancara::truncate();
+        TesKesehatan::truncate();
     }
 
     private function simulasiVerifikasi()
@@ -81,7 +83,7 @@ class simulasi extends Command
             if ($i <= $jml_lulus) {
                 Pendaftaran::updatePendaftaran($value->id, ['state' => 'tes_tulis']);
             } else {
-                Pendaftaran::updatePendaftaran($value->id, ['state' => 'gugur_tulis']);
+                Pendaftaran::updatePendaftaran($value->id, ['state' => 'gugur_dokumen']);
             }
             $i++;
         }
@@ -89,13 +91,14 @@ class simulasi extends Command
 
     private function simulasiTulis()
     {
-        $pendaftaran = Pendaftaran::all();
+        $pendaftaran = Pendaftaran::where('state', 'tes_tulis')->get();
         $jml_lulus = $pendaftaran->count()-50;
 
+        TesTulis::truncate();
         $i=0;
         foreach ($pendaftaran as $key => $value) {
             if ($i <= $jml_lulus) {
-                $state = 'tes_tulis';
+                $state = 'tes_wawancara';
                 $matematika = rand(70, 90);
                 $teknis_pertanian = rand(70, 90);
                 $hasil = 'y';
@@ -122,15 +125,15 @@ class simulasi extends Command
 
     private function simulasiWawancara()
     {
-        $pendaftaran = Pendaftaran::where('state', 'tes_tulis')->get();
+        $pendaftaran = Pendaftaran::where('state', 'tes_wawancara')->get();
         $jml_lulus = $pendaftaran->count()-50;
 
-        TesTulis::truncate();
+        Wawancara::truncate();
         $i=0;
         foreach ($pendaftaran as $key => $value) {
             $this->totalNilai = 0;
             if ($i <= $jml_lulus) {
-                $state = 'tes_wawancara';
+                $state = 'tes_kesehatan';
                 $kriteria = ['b', 'c'];
                 $hasil = 'y';
             } else {
@@ -189,7 +192,42 @@ class simulasi extends Command
 
     private function simulasiKesehatan()
     {
+        $pendaftaran = Pendaftaran::where('state', 'tes_kesehatan')->get();
+        $jml_lulus = $pendaftaran->count()-50;
 
+        TesKesehatan::truncate();
+        $i=0;
+        foreach ($pendaftaran as $key => $value) {
+            if ($i <= $jml_lulus) {
+                $state = 'verifikasi_akhir';
+                $kriteria = ['b', 'c'];
+                $hasil = 'y';
+            } else {
+                $state = 'gugur_kesehatan';
+                $kriteria = ['k'];
+                $hasil = 't';
+            }
+            $nilai = array_rand($kriteria);
+
+            Pendaftaran::updatePendaftaran($value->id, ['state' => $state]);
+
+            TesKesehatan::create([
+                'no_pendaftaran' => $value->no_pendaftaran,
+                'mata' => 'normal',
+                'gigi' => 'rapi',
+                'tindik' => 'tidak',
+                'cacat' => 'tida ada',
+                'tato' => 'tidak',
+                'tinggi_badan' => 180,
+                'penyakit' => 'maag',
+                'keterangan' => '',
+                'nilai_label' => $kriteria[$nilai],
+                'nilai_angka' => $this->getNilai($kriteria[$nilai]),
+                'hasil' => $hasil,
+                'uploaded_by' => 3
+            ]);
+            $i++;
+        }
     }
 
     private function getNilai(String $s): int

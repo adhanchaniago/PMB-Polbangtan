@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::group(['middleware' => 'roles', 'roles' => ['siswa', 'admin_pusat']], function ()
     {
         Route::resource('siswa', 'SiswaController');
+        Route::resource('pegawai', 'PegawaiController');
     });
 
     Route::group(['middleware' => 'roles', 'roles' => ['siswa', 'admin_pusat', 'operator']], function ()
@@ -75,6 +76,7 @@ Route::group(['middleware' => 'auth'], function ()
         Route::get('tes-wawancara/download/pdf', 'WawancaraController@pdf')->name('tes-wawancara.pdf');
         Route::get('tes-wawancara/download/xls', 'WawancaraController@xls')->name('tes-wawancara.xls');
         Route::resource('tes-kesehatan', 'TesKesehatanController');
+        Route::resource('verifikasi-akhir', 'VerifikasiAkhirController');
     });
 
     Route::group(['middleware' => 'roles', 'roles' => 'operator'], function ()

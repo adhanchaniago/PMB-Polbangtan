@@ -280,7 +280,7 @@ class PendaftaranController extends Controller
             return Redirect::to('pendaftaran')->withError('Anda tidak dapat memilih jurusan');
         }
 
-        $institusi = Institusi::all();
+        $institusi = Institusi::where('id', '>', '1')->get();
         $jurusan = $this->getJurusan($institusi[0]->id);
 
         return view('pendaftaran.jurusan', [
