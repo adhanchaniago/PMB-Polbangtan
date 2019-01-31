@@ -9,29 +9,14 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8">
-							<div class="hs-subtitle">Politeknik Pembangunan Pertanian (POLBANGTAN)</div>
-							<h2 class="hs-title">Penerimaan Mahasiswa Baru 2018/2019</h2>
-							<p class="hs-des">Penerimaan Mahasiswa Baru Politeknik Pembangunan Pertanian (POLBANGTAN) Lingkup Kementerian Pertanian Tahun Akademik 2018/2019</p>
-							<!-- <div class="site-btn">LIHAT JADWAL</div> -->
+							<div class="hs-subtitle"></div>
+							<h2 class="hs-title"></h2>
+							<p class="hs-des"></p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- <div class="hs-item set-bg" data-setbg="img/hero-slider/2.jpg">
-			<div class="hs-text">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8">
-							<div class="hs-subtitle">Award Winning UNIVERSITY</div>
-							<h2 class="hs-title">An investment in knowledge pays the best interest.</h2>
-							<p class="hs-des">Education is not just about going to school and getting a degree. It's about widening your<br> knowledge and absorbing the truth about life. Knowledge is power.</p>
-							<div class="site-btn">GET STARTED</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
 	</div>
 </section>
 <!-- Hero section end -->
@@ -46,7 +31,7 @@
 				</div>
 				<div class="counter-content">
 					<h2>Pendaftaran Online</h2>
-					<p><i class="fa fa-calendar-o"></i>01-12-2018 s/d 31-12-2018</p>
+					<p><i class="fa fa-calendar-o"></i></p>
 				</div>
 			</div>
 			<div class="col-lg-5 col-md-6">

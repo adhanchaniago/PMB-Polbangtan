@@ -108,10 +108,11 @@
 								@can('cms')
 								<li><a><i class="fa fa-edit"></i> CMS <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="#">Hubungi Kami</a></li>
-										<li><a href="#">Informasi Pendaftaran</a></li>
-										<li><a href="#">Brosur PMB</a></li>
-										<li><a href="#">Dokumen Persyaratan</a></li>
+										<li><a href="cms?page=homepage">Homepage</a></li>
+										<li><a href="cms?page=informasi-pendaftaran">Informasi Pendaftaran</a></li>
+										<li><a href="cms?page=brosur-pmb">Brosur PMB</a></li>
+										<li><a href="cms?page=dokumen">Dokumen Persyaratan</a></li>
+										<li><a href="{{ route('post.index') }}">Berita</a></li>
 									</ul>
 								</li>
 								@endcan

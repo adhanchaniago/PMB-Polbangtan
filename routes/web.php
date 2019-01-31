@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function ()
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/profile', 'HomeController@profile')->name('profile');
 	Route::put('/profile/{id}/update', 'HomeController@update')->name('profile.update');
+    Route::resource('post', 'PostController');
 
     Route::group(['middleware' => 'roles', 'roles' => 'administrator'], function ()
     {
@@ -77,6 +78,8 @@ Route::group(['middleware' => 'auth'], function ()
         Route::get('tes-wawancara/download/xls', 'WawancaraController@xls')->name('tes-wawancara.xls');
         Route::resource('tes-kesehatan', 'TesKesehatanController');
         Route::resource('verifikasi-akhir', 'VerifikasiAkhirController');
+
+        Route::resource('cms', 'ContentController');
     });
 
     Route::group(['middleware' => 'roles', 'roles' => 'operator'], function ()
