@@ -9,9 +9,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8">
-							<div class="hs-subtitle"></div>
-							<h2 class="hs-title"></h2>
-							<p class="hs-des"></p>
+							<div class="hs-subtitle">Politeknik Pembangunan Pertanian (POLBANGTAN)</div>
+							<h2 class="hs-title">Penerimaan Mahasiswa Baru 2018/2019</h2>
+							<p class="hs-des">Penerimaan Mahasiswa Baru Politeknik Pembangunan Pertanian (POLBANGTAN) Lingkup Kementerian Pertanian Tahun Akademik 2018/2019</p>
 						</div>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 				</div>
 				<div class="counter-content">
 					<h2>Pendaftaran Online</h2>
-					<p><i class="fa fa-calendar-o"></i></p>
+					<p><i class="fa fa-calendar-o"></i>01-12-2018 s/d 31-12-2018</p>
 				</div>
 			</div>
 			<div class="col-lg-5 col-md-6">
