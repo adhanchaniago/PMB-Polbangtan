@@ -31,6 +31,10 @@ class ContentController extends Controller
     		case 'brosur-pmb':
     			$view = $this->brosur();
     			break;
+
+    		case 'dokumen':
+    			$view = $this->dokumen();
+    			break;
     	}
 
     	return $view;
@@ -56,8 +60,17 @@ class ContentController extends Controller
     {
         $data = $request->konten;
         foreach ($data as $key => $value) {
-        	if($key == 'brosur-pmb') {
+        	if ($key == 'brosur-pmb') {
         		$value = $value->store($key);
+        	}
+
+        	if ($key == 'dokumen-pmb') {
+        		$file = $value['file']->store($key);
+
+        		$value = json_encode([
+        			'nama' => $value['nama'],
+        			'file' => $file
+        		]);
         	}
         	$service->createContent($key, [
         		'key' => $key,
@@ -108,9 +121,11 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, ContentService $service)
     {
-        //
+        $service->destroyDokumen($id);
+
+        return redirect()->back()->withSuccess('Konten berhasil dihapus');
     }
 
     private function homepage()
@@ -137,5 +152,18 @@ class ContentController extends Controller
     	$data['brosur'] = $this->service->getContentByKey('brosur-pmb')->value;
 
         return view('cms.brosur', $data);
+    }
+
+    private function dokumen()
+    {
+    	$dokumen = $this->service->getDokumen();
+    	$dokumen = $dokumen->map(function ($item) {
+    		$item['dokumen'] = json_decode($item->value, true);
+
+    		return $item;
+    	});
+    	$data['dokumen'] = $dokumen;
+
+        return view('cms.dokumen', $data);
     }
 }

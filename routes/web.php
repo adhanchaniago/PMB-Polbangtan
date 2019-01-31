@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
+Route::get('informasi-pendaftaran', 'WelcomeController@informasi');
+Route::get('brosur-pmb', 'WelcomeController@brosur');
+Route::get('dokumen-pmb', 'WelcomeController@dokumen');
+
 Route::get('/register-success', function () {
     return view('auth.success');
 });

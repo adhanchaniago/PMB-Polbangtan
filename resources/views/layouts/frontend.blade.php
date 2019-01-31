@@ -39,11 +39,11 @@
 				<div class="header-info">
 					<div class="hf-item">
 						<i class="fa fa-clock-o"></i>
-						<p><span>Hubungi Kami:</span>+62 123 4567 890, +62 123 4567 890</p>
+						<p><span>Hubungi Kami:</span>{{ $telepon }}</p>
 					</div>
 					<div class="hf-item">
 						<i class="fa fa-map-marker"></i>
-						<p><span>Alamat Kami:</span>40 Baria Street 133/2, New York City, US</p>
+						<p><span>Alamat Kami:</span>{{ $alamat }}</p>
 					</div>
 				</div>
 			</div>
@@ -59,10 +59,10 @@
 				</div>
 				<ul class="main-menu">
 					<li class="active"><a href="{{ url('/') }}">Home</a></li>
-					<li><a href="#">Jadwal Pendaftaran</a></li>
-					<li><a href="#">Informasi Pendaftaran</a></li>
-					<li><a href="#">Brosur PMB 2019/2020</a></li>
-					<li><a href="#">Dokumen Persyaratan</a></li>
+					<li><a href="{{ url('jadwal') }}">Jadwal Pendaftaran</a></li>
+					<li><a href="{{ url('informasi-pendaftaran') }}">Informasi Pendaftaran</a></li>
+					<li><a href="{{ url('brosur-pmb') }}">Brosur PMB 2019/2020</a></li>
+					<li><a href="{{ url('dokumen-pmb') }}">Dokumen Persyaratan</a></li>
 				</ul>
 			</div>
 		</nav>

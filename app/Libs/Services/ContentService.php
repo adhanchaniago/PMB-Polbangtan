@@ -19,8 +19,18 @@ class ContentService implements ContentContract
     	return $this->model->updateOrCreate(['key' => $key], $data);
     }
 
+    public function destroyDokumen(int $id)
+    {
+    	$this->model->findOrFail($id)->delete();
+    }
+
     public function getContentByKey(String $key)
     {
     	return $this->model->where('key', $key)->first();
+    }
+
+    public function getDokumen()
+    {
+    	return $this->model->where('key', 'dokumen-pmb')->get();
     }
 }
