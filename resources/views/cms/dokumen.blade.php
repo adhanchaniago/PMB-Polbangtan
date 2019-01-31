@@ -37,7 +37,7 @@
 										@foreach($dokumen as $key => $value)
 										<tr>
 											<td>{{ $value->dokumen['nama'] }}</td>
-											<td><a class="btn btn-default" href="{{ route('viewfile') . '?file=' . $value->dokumen['file'] }}" target="_blank"><i class="fa fa-search"></i></td>
+											<td><a class="btn btn-default" href="{{ route('viewfile') . '?file=' . $value->dokumen['file'] }}" target="_blank"><i class="fa fa-search"></i></a></td>
 											<td>
 												<a
 	  											href="{{ route('cms.destroy', $value->id) }}"

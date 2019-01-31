@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-Route::get('informasi-pendaftaran', 'WelcomeController@informasi');
-Route::get('brosur-pmb', 'WelcomeController@brosur');
-Route::get('dokumen-pmb', 'WelcomeController@dokumen');
+Route::get('/', 'WelcomeController@index')->name('frontend.index');
+Route::get('jadwal', 'WelcomeController@jadwal')->name('frontend.jadwal');
+Route::get('informasi-pendaftaran', 'WelcomeController@informasi')->name('frontend.informasi');
+Route::get('brosur-pmb', 'WelcomeController@brosur')->name('frontend.brosur');
+Route::get('dokumen-pmb', 'WelcomeController@dokumen')->name('frontend.dokumen');
 
 Route::get('/register-success', function () {
     return view('auth.success');

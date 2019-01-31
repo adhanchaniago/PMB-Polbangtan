@@ -11,6 +11,15 @@ use Redirect;
 
 class WelcomeController extends Controller
 {
+	protected $data;
+
+	public function __construct(ContentService $service)
+	{
+		$this->data = [];
+    	$this->data['alamat'] = $service->getContentByKey('alamat')->value;
+    	$this->data['telepon'] = $service->getContentByKey('no-telepon')->value;
+	}
+
     /**
      * [aktifasi akun]
      * @param  Request $request
@@ -32,7 +41,8 @@ class WelcomeController extends Controller
 
     public function aktifasi_resend()
     {
-    	return view('auth.aktifasi.resend');
+    	$data = $this->data;
+    	return view('auth.aktifasi.resend', $data);
     }
 
     public function aktifasi_send(Request $request, UserService $service)
@@ -53,49 +63,42 @@ class WelcomeController extends Controller
 
     public function index(ContentService $service)
     {
+    	$data = $this->data;
     	$data['judul'] = $service->getContentByKey('judul')->value;
     	$data['sub'] = $service->getContentByKey('sub-judul')->value;
     	$data['deskripsi'] = $service->getContentByKey('deskripsi')->value;
     	$data['countdown'] = $service->getContentByKey('countdown')->value;
-    	$data['alamat'] = $service->getContentByKey('alamat')->value;
-    	$data['telepon'] = $service->getContentByKey('no-telepon')->value;
 
-    	return view('welcome', $data);
+    	return view('frontend.welcome', $data);
     }
 
     public function informasi(ContentService $service)
     {
-    	$data['judul'] = $service->getContentByKey('judul')->value;
-    	$data['sub'] = $service->getContentByKey('sub-judul')->value;
-    	$data['deskripsi'] = $service->getContentByKey('deskripsi')->value;
-    	$data['alamat'] = $service->getContentByKey('alamat')->value;
-    	$data['telepon'] = $service->getContentByKey('no-telepon')->value;
+    	$data = $this->data;
     	$data['informasi'] = $service->getContentByKey('informasi-pendaftaran')->value;
 
-    	return view('informasi-pendaftaran', $data);
+    	return view('frontend.informasi-pendaftaran', $data);
     }
 
     public function brosur(ContentService $service)
     {
-    	$data['judul'] = $service->getContentByKey('judul')->value;
-    	$data['sub'] = $service->getContentByKey('sub-judul')->value;
-    	$data['deskripsi'] = $service->getContentByKey('deskripsi')->value;
-    	$data['alamat'] = $service->getContentByKey('alamat')->value;
-    	$data['telepon'] = $service->getContentByKey('no-telepon')->value;
+    	$data = $this->data;
     	$data['brosur'] = $service->getContentByKey('brosur-pmb')->value;
 
-    	return view('brosur-pmb', $data);
+    	return view('frontend.brosur-pmb', $data);
     }
 
     public function dokumen(ContentService $service)
     {
-    	$data['judul'] = $service->getContentByKey('judul')->value;
-    	$data['sub'] = $service->getContentByKey('sub-judul')->value;
-    	$data['deskripsi'] = $service->getContentByKey('deskripsi')->value;
-    	$data['alamat'] = $service->getContentByKey('alamat')->value;
-    	$data['telepon'] = $service->getContentByKey('no-telepon')->value;
-    	$data['informasi'] = $service->getContentByKey('informasi-pendaftaran')->value;
+    	$data = $this->data;
+    	$dokumen = $service->getDokumen();
+    	$dokumen = $dokumen->map(function ($item) {
+    		$item['dokumen'] = json_decode($item->value, true);
 
-    	return view('informasi-pendaftaran', $data);
+    		return $item;
+    	});
+    	$data['dokumen'] = $dokumen;
+
+    	return view('frontend.dokumen-pmb', $data);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Libs\Services\ContentService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -27,15 +28,29 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+	protected $data;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ContentService $service)
     {
         $this->middleware('guest')->except('logout');
+		$this->data = [];
+    	$this->data['alamat'] = $service->getContentByKey('alamat')->value;
+    	$this->data['telepon'] = $service->getContentByKey('no-telepon')->value;
+    }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login', $this->data);
     }
 
     /**

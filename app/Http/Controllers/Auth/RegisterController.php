@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Libs\Services\ContentService;
 use App\Libs\Services\SiswaService;
 use App\Libs\Services\UserService;
 use App\Http\Controllers\Controller;
@@ -36,15 +37,29 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/register-success';
+    protected $data;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ContentService $service)
     {
         $this->middleware('guest');
+		$this->data = [];
+    	$this->data['alamat'] = $service->getContentByKey('alamat')->value;
+    	$this->data['telepon'] = $service->getContentByKey('no-telepon')->value;
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('auth.register', $this->data);
     }
 
     /**

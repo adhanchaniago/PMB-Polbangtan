@@ -58,11 +58,11 @@
 					<a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
 				</div>
 				<ul class="main-menu">
-					<li class="active"><a href="{{ url('/') }}">Home</a></li>
-					<li><a href="{{ url('jadwal') }}">Jadwal Pendaftaran</a></li>
-					<li><a href="{{ url('informasi-pendaftaran') }}">Informasi Pendaftaran</a></li>
-					<li><a href="{{ url('brosur-pmb') }}">Brosur PMB 2019/2020</a></li>
-					<li><a href="{{ url('dokumen-pmb') }}">Dokumen Persyaratan</a></li>
+					<li class="{{ Request::is(trim(route('frontend.index', [], false))) ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
+					<li class="{{ Request::is(trim(route('frontend.jadwal', [], false), '/')) ? 'active' : '' }}"><a href="{{ url('jadwal') }}">Jadwal Pendaftaran</a></li>
+					<li class="{{ Request::is(trim(route('frontend.informasi', [], false), '/')) ? 'active' : '' }}"><a href="{{ url('informasi-pendaftaran') }}">Informasi Pendaftaran</a></li>
+					<li class="{{ Request::is(trim(route('frontend.brosur', [], false), '/')) ? 'active' : '' }}"><a href="{{ url('brosur-pmb') }}">Brosur PMB 2019/2020</a></li>
+					<li class="{{ Request::is(trim(route('frontend.dokumen', [], false), '/')) ? 'active' : '' }}"><a href="{{ url('dokumen-pmb') }}">Dokumen Persyaratan</a></li>
 				</ul>
 			</div>
 		</nav>
