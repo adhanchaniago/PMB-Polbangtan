@@ -16,6 +16,7 @@ Route::get('jadwal', 'WelcomeController@jadwal')->name('frontend.jadwal');
 Route::get('informasi-pendaftaran', 'WelcomeController@informasi')->name('frontend.informasi');
 Route::get('brosur-pmb', 'WelcomeController@brosur')->name('frontend.brosur');
 Route::get('dokumen-pmb', 'WelcomeController@dokumen')->name('frontend.dokumen');
+Route::resource('post', 'PostController');
 
 Route::get('/register-success', function () {
     return view('auth.success');
@@ -32,7 +33,6 @@ Route::group(['middleware' => 'auth'], function ()
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/profile', 'HomeController@profile')->name('profile');
 	Route::put('/profile/{id}/update', 'HomeController@update')->name('profile.update');
-    Route::resource('post', 'PostController');
 
     Route::group(['middleware' => 'roles', 'roles' => 'administrator'], function ()
     {

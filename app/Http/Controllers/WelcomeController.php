@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libs\Services\ContentService;
+use App\Libs\Services\PostService;
 use App\Libs\Services\UserService;
 use App\Mail\AktivasiAkun;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class WelcomeController extends Controller
     	}
     }
 
-    public function index(ContentService $service)
+    public function index(ContentService $service, PostService $pService)
     {
     	$data = $this->data;
     	$data['judul'] = $service->getContentByKey('judul')->value;
@@ -69,7 +70,9 @@ class WelcomeController extends Controller
     	$data['deskripsi'] = $service->getContentByKey('deskripsi')->value;
     	$data['countdown'] = $service->getContentByKey('countdown')->value;
 
-    	return view('frontend.welcome', $data);
+    	$data['post'] = $pService->getPost(['state' => ['publish']], 4);
+
+    	return view('welcome', $data);
     }
 
     public function informasi(ContentService $service)
