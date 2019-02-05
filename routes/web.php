@@ -17,7 +17,6 @@ Route::get('informasi-pendaftaran', 'WelcomeController@informasi')->name('fronte
 Route::get('brosur-pmb', 'WelcomeController@brosur')->name('frontend.brosur');
 Route::get('dokumen-pmb', 'WelcomeController@dokumen')->name('frontend.dokumen');
 Route::resource('post', 'PostController');
-Route::resource('jadwal', 'JadwalController');
 
 Route::get('/register-success', function () {
     return view('auth.success');
@@ -84,6 +83,7 @@ Route::group(['middleware' => 'auth'], function ()
         Route::resource('verifikasi-akhir', 'VerifikasiAkhirController');
 
         Route::resource('cms', 'ContentController');
+		Route::resource('jadwal', 'JadwalController');
     });
 
     Route::group(['middleware' => 'roles', 'roles' => 'operator'], function ()

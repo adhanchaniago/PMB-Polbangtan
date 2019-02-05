@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libs\Services\ContentService;
+use App\Libs\Services\JadwalService;
 use App\Libs\Services\PostService;
 use App\Libs\Services\UserService;
 use App\Mail\AktivasiAkun;
@@ -103,5 +104,12 @@ class WelcomeController extends Controller
     	$data['dokumen'] = $dokumen;
 
     	return view('frontend.dokumen-pmb', $data);
+    }
+
+    public function jadwal(JadwalService $service)
+    {
+    	$data = $this->data;
+    	$data['jadwal'] = $service->getJadwal();
+    	return view('frontend.jadwal', $data);
     }
 }
