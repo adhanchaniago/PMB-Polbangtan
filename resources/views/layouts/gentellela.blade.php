@@ -72,9 +72,6 @@
 										@can('user_read')
 										<li><a href="{{ route('pegawai.index') }}">Data User</a></li>
 										@endcan
-										@can('jadwal_read')
-										<li><a href="#">Jadwal Pendaftaran</a></li>
-										@endcan
 									</ul>
 								</li>
 								@endcan
@@ -109,6 +106,7 @@
 								<li><a><i class="fa fa-edit"></i> CMS <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a href="cms?page=homepage">Homepage</a></li>
+										<li><a href="{{ route('jadwal.index') }}">Jadwal Pendaftaran</a></li>
 										<li><a href="cms?page=informasi-pendaftaran">Informasi Pendaftaran</a></li>
 										<li><a href="cms?page=brosur-pmb">Brosur PMB</a></li>
 										<li><a href="cms?page=dokumen">Dokumen Persyaratan</a></li>

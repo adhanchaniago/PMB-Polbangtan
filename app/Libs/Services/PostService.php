@@ -33,4 +33,9 @@ class PostService implements PostContract
     {
     	return $this->model->findOrFail($id);
     }
+
+    public function updatePost(int $id, array $data)
+    {
+    	return $this->model->findOrFail($id)->update($data);
+    }
 }

@@ -155,7 +155,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-3">Thumbnail*</label>
 						<div class="col-sm-9">
-							<input type="file" id="thumbnail_update" class="form-control" name="thumbnail" required>
+							<input type="file" id="thumbnail_update" class="form-control" name="thumbnail">
 						</div>
 					</div>
 				</div>

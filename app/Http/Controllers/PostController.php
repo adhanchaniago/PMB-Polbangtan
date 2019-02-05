@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index(PostService $service)
     {
     	$filter = ['state' => ['draft', 'publish']];
-        $data = $service->getPost($filter, 7);
+        $data = $service->getPost($filter, 0);
 
         return view('post.index', ['data' => $data]);
     }
@@ -39,7 +39,7 @@ class PostController extends Controller
      */
     public function store(Request $request, PostService $service)
     {
-        $data = $request->except(['_token']);
+        $data = $request->except(['_token', 'thumbnail']);
         $data['user_id'] = $request->user()->id;
 
         if ($request->hasFile('thumbnail')) {
@@ -84,9 +84,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, PostService $service)
     {
-        //
+        $data = $request->except(['_token', '_method', 'thumbnail']);
+        $data['user_id'] = $request->user()->id;
+
+        if ($request->hasFile('thumbnail')) {
+        	$data['thumbnail'] = $request->thumbnail->store('post');
+        }
+
+        $service->updatePost($id, $data);
+        return redirect()->to('post')->withSuccess('Berita baru berhasil diperbaharui');
     }
 
     /**

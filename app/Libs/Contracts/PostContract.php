@@ -11,4 +11,6 @@ interface PostContract
     public function getPost(array $filter, int $limit);
 
     public function getPostById(int $id);
+
+    public function updatePost(int $id, array $data);
 }

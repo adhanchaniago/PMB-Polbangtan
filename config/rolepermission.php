@@ -22,22 +22,6 @@ return [
             'name' => 'siswa_delete',
             'label' => 'Siswa Delete',
         ],
-        'jadwal_read' => [
-            'name' => 'jadwal_read',
-            'label' => 'Jadwal Read',
-        ],
-        'jadwal_create' => [
-            'name' => 'jadwal_create',
-            'label' => 'Jadwal Create',
-        ],
-        'jadwal_update' => [
-            'name' => 'jadwal_update',
-            'label' => 'Jadwal Update',
-        ],
-        'jadwal_delete' => [
-            'name' => 'jadwal_delete',
-            'label' => 'Jadwal Delete',
-        ],
         'pendaftaran' => [
             'name' => 'pendaftaran',
             'label' => 'Pendaftaran',
@@ -100,10 +84,6 @@ return [
                 'user_read',
                 'siswa_read',
                 'siswa_delete',
-                'jadwal_read',
-                'jadwal_create',
-                'jadwal_update',
-                'jadwal_delete',
                 'pendaftaran',
                 'verifikasi_dokumen',
                 'tes_wawancara',
