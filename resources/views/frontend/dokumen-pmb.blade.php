@@ -21,7 +21,7 @@
         			<tr>
 						<td>{{ $no }}</td>
 						<td>{{ $value->dokumen['nama'] }}</td>
-						<td><a class="btn btn-default" href="{{ route('viewfile') . '?file=' . $value->dokumen['file'] }}" target="_blank"><i class="fa fa-search"></i></a></td>
+						<td><a class="btn btn-default" href="{{ route('viewfile') . '?file=' . $value->dokumen['file'] }}" target="_blank"><i class="fa fa-download"></i></a></td>
 					</tr>
 					@php $no++; @endphp
         		@endforeach

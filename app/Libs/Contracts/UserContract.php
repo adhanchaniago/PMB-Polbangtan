@@ -15,4 +15,6 @@ interface UserContract
     public function updateUser(int $id, array $data);
 
     public function updateUserPegawai(int $personId, array $data);
+
+    public function updateUserSiswa(int $personId, array $data);
 }

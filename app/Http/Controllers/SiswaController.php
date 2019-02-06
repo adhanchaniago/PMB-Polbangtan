@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jurusan;
 use App\Libs\Services\SiswaService;
+use App\Libs\Services\UserService;
 use App\Libs\Traits\InfoSiswa;
 use Illuminate\Http\Request;
 use PDF;
@@ -83,7 +84,7 @@ class SiswaController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, SiswaService $service)
+    public function update(Request $request, $id, SiswaService $service, UserService $uService)
     {
         $this->validate($request, [
             'nama' => 'required',
@@ -109,6 +110,7 @@ class SiswaController extends Controller
 
 
         $service->updateSiswa($id, $request);
+        $uService->updateUserSiswa($id, ['name' => $request->nama]);
 
         return Redirect::to('siswa/' . $id)->withSuccess('Data siswa berhasil diperbaharui');
     }

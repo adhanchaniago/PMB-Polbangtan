@@ -12,6 +12,8 @@ class CmsSeeder extends Seeder
      */
     public function run()
     {
+    	Content::truncate();
+    	
     	/* HOMEPAGE */
         Content::create([
         	'key' => 'judul',
@@ -58,54 +60,54 @@ class CmsSeeder extends Seeder
         /* BROSUR */
         Content::create([
         	'key' => 'brosur-pmb',
-        	'value' => 'default\/brosur.jpg'
+        	'value' => 'default/brosur.jpg'
         ]);
         /* BROSUR */
 
         /* DOKUMEN PMB */
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Formulir Pendaftaran Jalur Tugas Belajar","file":"default\/form1a.png"}'
+        	'value' => '{"nama":"Formulir Pendaftaran Jalur Tugas Belajar","file":"default/form1a.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Formulir Pendaftaran Jalur Undangan dan Kerjasama","file":"default\/form1b.png"}'
+        	'value' => '{"nama":"Formulir Pendaftaran Jalur Undangan dan Kerjasama","file":"default/form1b.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Formulir Pendaftaran Jalur Umum","file":"default\/form1c.png"}'
+        	'value' => '{"nama":"Formulir Pendaftaran Jalur Umum","file":"default/form1c.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Keterangan Kesehatan","file":"default\/form2.png"}'
+        	'value' => '{"nama":"Keterangan Kesehatan","file":"default/form2.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Surat Pernyataan Mentaati Peraturan Akademik di Polbangtan","file":"default\/form3.png"}'
+        	'value' => '{"nama":"Surat Pernyataan Mentaati Peraturan Akademik di Polbangtan","file":"default/form3.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Usulan Calon Peserta Tugas Belajar Dalam Negeri","file":"default\/form4.png"}'
+        	'value' => '{"nama":"Usulan Calon Peserta Tugas Belajar Dalam Negeri","file":"default/form4.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Surat Perjanjian Tugas Belajar Dalam Negeri","file":"default\/form5.pdf"}'
+        	'value' => '{"nama":"Surat Perjanjian Tugas Belajar Dalam Negeri","file":"default/form5.pdf"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Daftar Riwayat Hidup Peserta Pendidikan dan Tugas Belajar","file":"default\/form6.png"}'
+        	'value' => '{"nama":"Daftar Riwayat Hidup Peserta Pendidikan dan Tugas Belajar","file":"default/form6.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Surat Pernyataan Tidak Menikah Selama Mengikuti Pendidikan","file":"default\/form7.png"}'
+        	'value' => '{"nama":"Surat Pernyataan Tidak Menikah Selama Mengikuti Pendidikan","file":"default/form7.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Surat Pernyataan Tidak Hamil Selama Mengikuti Pendidikan","file":"default\/form8.png"}'
+        	'value' => '{"nama":"Surat Pernyataan Tidak Hamil Selama Mengikuti Pendidikan","file":"default/form8.png"}'
         ]);
         Content::create([
         	'key' => 'dokumen-pmb',
-        	'value' => '{"nama":"Surat Pernyataan Tidak Menuntuk Diangkat Aparatur Sipil Negara (PNS/P3K)","file":"default\/form9.png"}'
+        	'value' => '{"nama":"Surat Pernyataan Tidak Menuntuk Diangkat Aparatur Sipil Negara (PNS/P3K)","file":"default/form9.png"}'
         ]);
         /* DOKUMEN */
     }

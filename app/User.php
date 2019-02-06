@@ -53,6 +53,14 @@ class User extends Authenticatable
 	    return $user->first();
     }
 
+    public static function updateUserSiswa(int $personId, array $data)
+    {
+    	$user = User::where('person_id', $personId)
+    				->where('person_type', 'siswa');
+		$user->update($data);
+	    return $user->first();
+    }
+
     public function querySearch(array $filter) : ?Collection
     {
         $query = $this->newQuery();
