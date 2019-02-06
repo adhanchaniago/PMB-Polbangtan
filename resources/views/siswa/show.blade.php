@@ -1,6 +1,23 @@
 @extends('layouts.gentellela')
 
 @section('content')
+<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Memeriksa Data NISN</h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; height: 40px">
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -35,6 +52,18 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="x_content">
+							<div class="form-group {{ $errors->has('nisn') ? 'bad' : '' }}">
+								<label class="control-label col-sm-2">NISN*</label>
+								<div class="col-sm-9">
+									{{ Form::text('nisn', Input::old('nisn'), array('id' => 'nisn', 'class' => 'form-control', 'required' => true) )}}
+
+									@if ($errors->has('nisn'))
+	                                    <span class="invalid-feedback" role="alert">
+	                                        <strong>{{ $errors->first('nisn') }}</strong>
+	                                    </span>
+	                            	@endif
+								</div>
+							</div>							
 							<div class="form-group">
 								<label class="control-label col-sm-2">Nama Lengkap*</label>
 								<div class="col-sm-9">
@@ -182,18 +211,6 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="x_content">
-							<div class="form-group {{ $errors->has('nisn') ? 'bad' : '' }}">
-								<label class="control-label col-sm-2">NISN*</label>
-								<div class="col-sm-9">
-									{{ Form::text('nisn', Input::old('nisn'), array('id' => 'nisn', 'class' => 'form-control', 'required' => true) )}}
-
-									@if ($errors->has('nisn'))
-	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $errors->first('nisn') }}</strong>
-	                                    </span>
-	                            	@endif
-								</div>
-							</div>							
 							<div class="form-group">
 								<label class="control-label col-sm-2">Jenis Sekolah</label>
 								<div class="col-sm-9">
@@ -353,6 +370,24 @@
 	@endif
 
 	<script type="text/javascript">
+		var modalLoading = 
+		'<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false role="dialog">\
+	        <div class="modal-dialog">\
+	            <div class="modal-content">\
+	                <div class="modal-header">\
+	                    <h4 class="modal-title">Please wait...</h4>\
+	                </div>\
+	                <div class="modal-body">\
+	                    <div class="progress">\
+	                      <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"\
+	                      aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; height: 40px">\
+	                      </div>\
+	                    </div>\
+	                </div>\
+	            </div>\
+	        </div>\
+	    </div>';
+
 		$(document).ready(function(){
 			disable_input();
 		});
@@ -399,6 +434,38 @@
 					});
 	            }
 	        });
+		});
+
+		$("#nisn").blur(function(item) {
+			disable_input();
+			$("#pleaseWaitDialog").modal("show");
+
+			let value = item.target.value;
+			let url = 'http://simdik.bppsdmp.pertanian.go.id/api?key=973b2119fe1d68770086936e1214972d&nisn=' + value;
+
+			$.ajax({
+				type: 'GET',
+				url: url,
+  				contentType: 'text/plain',
+			  	xhrFields: {
+			    	withCredentials: false
+			  	},
+			  	headers: {
+			  		'Access-Control-Allow-Origin': false
+			  	},
+
+  				success: function(response) {
+	                console.log(response);
+	                $("#pleaseWaitDialog").modal("hide");
+	                enable_input();
+  				},
+
+  				error: function(error) {
+	                console.log(error);
+	                $("#pleaseWaitDialog").modal("hide");
+	                enable_input();
+  				}
+			});
 		});
 	</script>
 @endsection

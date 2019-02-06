@@ -12,7 +12,6 @@ class JadwalSeeder extends Seeder
      */
     public function run()
     {
-
         Jadwal::create([
         	'nama' => 'Pendaftaran',
         	'tanggal_awal' => '2019-04-25',
