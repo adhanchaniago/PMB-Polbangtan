@@ -44,6 +44,8 @@ class PostController extends Controller
 
         if ($request->hasFile('thumbnail')) {
         	$data['thumbnail'] = $request->thumbnail->store('post');
+        } else {
+        	$data['thumbnail'] = 'default/empty.png';
         }
 
         $service->createPost($data);
