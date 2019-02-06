@@ -76,87 +76,24 @@
 			</div>
 			<div class="x_content">
 				<ul class="list-unstyled timeline">
+					@foreach($jadwal as $key => $value)
 					<li>
                         <div class="tags">
-                          <a href="" class="tag">
-                            <span></span>
-                          </a>
                         </div>
 						<div class="block">
 							<div class="block_content">
 								<h2 class="title">
-									<a>25 April - 25 April 2018</a>
+									@if ($value->tanggal_awal == $value->tanggal_akhir)
+										<a>{{ date('d M Y', strtotime($value->tanggal_awal)) }}</a>
+									@else
+										<a>{{ date('d M Y', strtotime($value->tanggal_awal)) }} - {{ date('d M Y', strtotime($value->tanggal_akhir)) }}</a>
+									@endif
 								</h2>
-								<p class="excerpt">Pendaftaran Calon Mahasiswa Baru</p>
+								<p class="excerpt">{{ $value->nama }}</p>
 							</div>
 						</div>
 					</li>
-					<li>
-						<div class="block">
-							<div class="block_content">
-								<h2 class="title">
-									<a>28 Mei 2018</a>
-								</h2>
-								<p class="excerpt">Pengumuman Hasil Seleksi Administrasi Jalur Undangan & Tugas Belajar
-								</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="block">
-							<div class="block_content">
-								<h2 class="title">
-									<a>1 Juni 2018</a>
-								</h2>
-								<p class="excerpt">Pengumuman Hasil Seleksi Administrasi Jalur Umum & Jalur Kerjasama
-								</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="block">
-							<div class="block_content">
-								<h2 class="title">
-									<a>3 Juli - 5 Juli 2018</a>
-								</h2>
-								<p class="excerpt">Pelaksanaan Tes Tertulis & Wawancara Jalur Umum & Jalur Kerjasama
-								</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="block">
-							<div class="block_content">
-								<h2 class="title">
-									<a>9 Juli 2018</a>
-								</h2>
-								<p class="excerpt">Pengumuman Hasil Tes Tertulis dan Wawancara Jalur Umum & Jalur Kerjasama
-								</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="block">
-							<div class="block_content">
-								<h2 class="title">
-									<a>17 Juli - 19 Juli 2018</a>
-								</h2>
-								<p class="excerpt">Tes Kesehatan Untuk Semua Jalur
-								</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="block">
-							<div class="block_content">
-								<h2 class="title">
-									<a>24 Juli 2018</a>
-								</h2>
-								<p class="excerpt">Pengumuman Calon Mahasiswa Diterima Untuk Semua Jalur
-								</p>
-							</div>
-						</div>
-					</li>
+					@endforeach
 				</ul>
 			</div>
 		</div>

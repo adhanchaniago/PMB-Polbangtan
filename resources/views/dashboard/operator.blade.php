@@ -38,9 +38,9 @@
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ $value->nama }}</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td>10</td>
+                            <td>5</td>
+                            <td>15</td>
                         </tr>
                         @php $no++; @endphp
                     @endforeach
@@ -48,9 +48,9 @@
                     <tfoot>
                         <tr>
                             <td colspan="2">Total</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td>30</td>
+                            <td>15</td>
+                            <td>45</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -81,7 +81,7 @@
                         "Gugur"
                     ],
                     datasets: [{
-                        data: [30, 10],
+                        data: [30, 15],
                         backgroundColor: [
                             "#E95E4F",
                             "#9B59B6",

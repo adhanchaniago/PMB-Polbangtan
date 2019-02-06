@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libs\Services\JadwalService;
 use App\Libs\Services\UserService;
 use App\Libs\Traits\InfoOperator;
 use App\Libs\Traits\InfoSiswa;
@@ -28,7 +29,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, JadwalService $service)
     {
     	$data = $request->user()->person;
     	$kelengkapan = true;
@@ -36,6 +37,7 @@ class HomeController extends Controller
     	$pendaftaran = '';
     	$institusi = '';
         $jurusan = '';
+        $jadwal = $service->getJadwal();
 
     	if ( $request->user()->person_type == 'siswa' ) {
     		$kelengkapan = $this->cekKelengkapanDokumen();
@@ -54,7 +56,8 @@ class HomeController extends Controller
         	'state' => $state,
             'pendaftaran' => $pendaftaran,
             'institusi' => $institusi,
-            'jurusan' => $jurusan
+            'jurusan' => $jurusan,
+            'jadwal' => $jadwal
         ]);
     }
 
