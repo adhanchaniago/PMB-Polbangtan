@@ -4,7 +4,7 @@
 <!-- Hero section -->
 <section class="hero-section">
 	<div class="hero-slider owl-carousel">
-		<div class="hs-item set-bg" data-setbg="{{ asset('frontend/img/hero-slider/1.png') }}">
+		<div class="hs-item set-bg" data-setbg="{{ asset('frontend/img/hero-slider/1.jpg') }}">
 			<div class="hs-text">
 				<div class="container">
 					<div class="row">
