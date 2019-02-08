@@ -19,7 +19,8 @@ class InstitusiService implements InstitusiContract
     	return $this->model->all();
     }
 
-    public function getOnlyCabang(){
+    public function getOnlyCabang()
+    {
     	return $this->model->where('id', '>', 1)->get();
     }
 }

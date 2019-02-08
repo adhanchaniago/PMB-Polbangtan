@@ -21,7 +21,7 @@ class UserService implements UserContract
      * @param  array  $data
      * @return User
      */
-    public function createUser(array $data) : User
+    public function createUser(array $data)
     {
     	return $this->model->createUser($data);
     }
@@ -30,7 +30,7 @@ class UserService implements UserContract
      * [getUserByEmail]
      * @param  String $email
      */
-    public function getUserByEmail(String $email) : ?User
+    public function getUserByEmail(String $email)
     {
     	return $this->model->whereEmail($email)->first();
     }
@@ -40,7 +40,7 @@ class UserService implements UserContract
      * @param  array  $filter
      * @return Collection : null
      */
-    public function searchUser(array $filter) : ?Collection
+    public function searchUser(array $filter)
     {
     	return $this->model->querySearch($filter);
     }
@@ -50,17 +50,17 @@ class UserService implements UserContract
      * @param array $data
      * @return User
      */
-    public function updateUser(int $id, array $data) : User
+    public function updateUser(int $id, array $data)
     {
     	return $this->model->updateUser($id, $data);
     }
 
-    public function updateUserPegawai(int $personId, array $data) : User
+    public function updateUserPegawai(int $personId, array $data)
     {
     	return $this->model->updateUserPegawai($personId, $data);
     }
 
-    public function updateUserSiswa(int $personId, array $data) : User
+    public function updateUserSiswa(int $personId, array $data)
     {
     	return $this->model->updateUserSiswa($personId, $data);    	
     }

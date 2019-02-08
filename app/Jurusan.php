@@ -8,7 +8,7 @@ class Jurusan extends Model
 {
     protected $guarded = [];
 
-    public static function selectName(int $jurusanId) : String
+    public static function selectName(int $jurusanId)
     {
         $jurusan = Jurusan::findOrFail($jurusanId);
 

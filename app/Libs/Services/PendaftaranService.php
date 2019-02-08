@@ -17,7 +17,7 @@ class PendaftaranService implements PendaftaranContract
         $this->model = $model;
     }
 
-    public function createPendaftaran(array $data) : Void
+    public function createPendaftaran(array $data)
     {
     	$this->model->createPendaftaran($data);
     }
@@ -27,7 +27,7 @@ class PendaftaranService implements PendaftaranContract
         return $this->model->findOrFail($id);
     }
 
-    public function getPendaftaranBySiswa(int $siswaId) : ?Collection
+    public function getPendaftaranBySiswa(int $siswaId)
     {
     	return $this->model->querySearch(['siswa_id' => $siswaId]);
     }

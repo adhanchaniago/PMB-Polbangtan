@@ -18,7 +18,7 @@ class SerialNumberService implements SerialNumberContract
      * @param String $institusi
      * @return String
      */
-    public function getSerialNumber(int $institusi) : String
+    public function getSerialNumber(int $institusi)
     {
         $serial = $this->model
                        ->where('institusi', $institusi)

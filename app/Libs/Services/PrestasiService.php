@@ -21,7 +21,7 @@ class PrestasiService implements PrestasiContract
      * @param  array  $data [description]
      * @return Prestasi
      */
-    public function createPrestasi(array $data) : Prestasi
+    public function createPrestasi(array $data)
     {
     	return $this->model->createPrestasi($data);
     }
@@ -30,7 +30,7 @@ class PrestasiService implements PrestasiContract
      * @param int $pendaftaranId
      * @return Collection|null
      */
-    public function getPrestasiByPendaftaran(int $pendaftaranId) : ?Collection
+    public function getPrestasiByPendaftaran(int $pendaftaranId)
     {
     	return $this->model->where('pendaftaran_id', $pendaftaranId)->get();
     }
