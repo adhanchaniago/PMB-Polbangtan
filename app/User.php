@@ -61,7 +61,7 @@ class User extends Authenticatable
 	    return $user->first();
     }
 
-    public function querySearch(array $filter) : ?Collection
+    public function querySearch(array $filter)
     {
         $query = $this->newQuery();
 
